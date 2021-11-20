@@ -1,0 +1,5 @@
+package Bomber;
+
+public enum BombermanType {
+    PLAYER, WALL, BRICK, BOMB, FIRE, SPEED_ITEM, BOMB_ITEM, FLAME_ITEM, PORTAL, BRICK_BREAK, FLAME_PASS_ITEM
+}
