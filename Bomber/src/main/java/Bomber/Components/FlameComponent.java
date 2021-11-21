@@ -12,6 +12,7 @@ import com.almasb.fxgl.texture.AnimationChannel;
 import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
+import static Bomber.Constants.GameConst.*;
 
 public class FlameComponent extends Component {
     private AnimatedTexture texture;
@@ -34,11 +35,11 @@ public class FlameComponent extends Component {
                 Entity bBreak = spawn("brick_break", new SpawnData(brick.getX(), brick.getY()));
                 brick.removeFromWorld();
                 getGameTimer().runOnceAfter(bBreak::removeFromWorld, Duration.seconds(1));
-                inc("score", 10);
+                inc("score", SCORE_BRICK);
             }
         });
 
-        animationFlame = new AnimationChannel(image("bomb_exploded_1.png"), 3, 64, 64,
+        animationFlame = new AnimationChannel(image("bomb_exploded_1.png"), 3, SIZE, SIZE,
                 Duration.seconds(0.4), 0, 2);
 
         texture = new AnimatedTexture(animationFlame);

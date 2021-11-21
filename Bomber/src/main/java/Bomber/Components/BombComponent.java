@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import static com.almasb.fxgl.dsl.FXGL.spawn;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameTimer;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.image;
+import static Bomber.Constants.GameConst.*;
 
 public class BombComponent extends Component {
     private ArrayList<Entity> listFire = new ArrayList<>();
@@ -21,7 +22,7 @@ public class BombComponent extends Component {
     private AnimationChannel animation;
 
     public BombComponent() {
-        animation = new AnimationChannel(image("bomb_ani.png"), 3, 64, 64,
+        animation = new AnimationChannel(image("bomb_ani.png"), 3, SIZE, SIZE,
                 Duration.seconds(0.5), 0, 2);
         texture = new AnimatedTexture(animation);
         texture.loop();
@@ -34,10 +35,10 @@ public class BombComponent extends Component {
 
     public void explode() {
         for (int i = 1; i <= 1; i++) {
-            listFire.add(spawn("fire", new SpawnData(entity.getX() + 64 * i, entity.getY())));
-            listFire.add(spawn("fire", new SpawnData(entity.getX() - 64 * i, entity.getY())));
-            listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY() + 64 * i)));
-            listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY() - 64 * i)));
+            listFire.add(spawn("fire", new SpawnData(entity.getX() + SIZE * i, entity.getY())));
+            listFire.add(spawn("fire", new SpawnData(entity.getX() - SIZE * i, entity.getY())));
+            listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY() + SIZE * i)));
+            listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY() - SIZE * i)));
         }
         listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY())));
 

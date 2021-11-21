@@ -23,12 +23,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
+import static Bomber.Constants.GameConst.*;
 
 public class BombermanFactory implements EntityFactory {
     @Spawns("background")
     public Entity newBackground(SpawnData data) {
         return FXGL.entityBuilder(data)
-                .view(new Rectangle(1280, 704, Color.GREEN))
+                .view(new Rectangle(GAME_WORLD_WIDTH, GAME_WORLD_HEIGHT, Color.GREEN))
                 .zIndex(-100)
                 .with(new IrremovableComponent())
                 .build();
@@ -45,7 +46,7 @@ public class BombermanFactory implements EntityFactory {
 
         return FXGL.entityBuilder(data)
                 .type(BombermanType.PLAYER)
-                .viewWithBBox(new Circle(32, 32, 30, Color.TRANSPARENT))
+                .viewWithBBox(new Circle(32, 32, 30, Color.WHITE))
                 .with(physics)
                 .with(new PlayerComponent())
                 .with(new PhysicsComponent())
@@ -82,7 +83,7 @@ public class BombermanFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(BombermanType.BRICK_BREAK)
                 .with(new BrickBreakComponent())
-                .viewWithBBox(new Rectangle(60, 60, Color.TRANSPARENT))
+                .viewWithBBox(new Rectangle(SIZE - 4, SIZE - 4, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
                 .zIndex(1)
                 .build();
@@ -101,7 +102,7 @@ public class BombermanFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(BombermanType.FIRE)
                 .with(new FlameComponent())
-                .viewWithBBox(new Rectangle(60, 60, Color.TRANSPARENT))
+                .viewWithBBox(new Rectangle(SIZE - 4, SIZE - 4, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
                 .with(new CollidableComponent(true))
                 .zIndex(-1)

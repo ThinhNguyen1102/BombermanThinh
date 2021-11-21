@@ -14,17 +14,18 @@ import com.almasb.fxgl.texture.AnimationChannel;
 import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
+import static Bomber.Constants.GameConst.*;
 
 public class PlayerComponent extends Component {
-    enum MoveDirection {
-        DOWN, UP, LEFT, RIGHT, STOP, DIE
+    public static final double ANIM_TIME_PLAYER = 0.5;
+    private int bombsPlaced = 0;
+    public enum MoveDirection {
+        UP, RIGHT, DOWN, LEFT, STOP,DIE
     }
 
     public enum AnimationSkin {
         NORMAL, FLAME_PASS
     }
-
-    private int bombsPlaced = 0;
 
     private MoveDirection currMove = MoveDirection.STOP;
     private PhysicsComponent physics;
@@ -41,12 +42,12 @@ public class PlayerComponent extends Component {
             @Override
             protected void onCollisionBegin(Entity player, Entity speedItem) {
                 speedItem.removeFromWorld();
-                inc("score", 20);
-                inc("speed", 150);
+                inc("score", SCORE_ITEM);
+                inc("speed", SPEED);
                 speed = geti("speed");
 
                 getGameTimer().runOnceAfter(() -> {
-                    inc("speed", -150);
+                    inc("speed", -SPEED);
                     speed = geti("speed");
                 }, Duration.seconds(8));
             }
@@ -55,7 +56,7 @@ public class PlayerComponent extends Component {
             @Override
             protected void onCollisionBegin(Entity player, Entity bombItem) {
                 bombItem.removeFromWorld();
-                inc("score", 20);
+                inc("score", SCORE_ITEM);
                 inc("bomb", 1);
             }
         });
@@ -63,7 +64,7 @@ public class PlayerComponent extends Component {
             @Override
             protected void onCollisionBegin(Entity player, Entity flameItem) {
                 flameItem.removeFromWorld();
-                inc("score", 20);
+                inc("score", SCORE_ITEM);
                 inc("flame", 1);
             }
         });
@@ -72,7 +73,7 @@ public class PlayerComponent extends Component {
             @Override
             protected void onCollisionBegin(Entity player, Entity flamePassItem) {
                 flamePassItem.removeFromWorld();
-                inc("score", 20);
+                inc("score", SCORE_ITEM);
                 setAnimation(AnimationSkin.FLAME_PASS);
                 getGameTimer().runOnceAfter(() -> {
                     setAnimation(AnimationSkin.NORMAL);
@@ -92,43 +93,43 @@ public class PlayerComponent extends Component {
                     Duration.seconds(1.8), 0, 2);
 
             animIdleDown = new AnimationChannel(image("player_down.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 0);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
             animIdleRight = new AnimationChannel(image("player_right.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 0);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
             animIdleUp = new AnimationChannel(image("player_up.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 0);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
             animIdleLeft = new AnimationChannel(image("player_left.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 0);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
 
             animWalkDown = new AnimationChannel(image("player_down.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 2);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
             animWalkRight = new AnimationChannel(image("player_right.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 2);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
             animWalkUp = new AnimationChannel(image("player_up.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 2);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
             animWalkLeft = new AnimationChannel(image("player_left.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 2);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
         } else {
             animDie = new AnimationChannel(image("player_die.png"), 3, 60, 60,
                     Duration.seconds(1.8), 0, 2);
 
             animIdleDown = new AnimationChannel(image("player_down_1.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 0);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
             animIdleRight = new AnimationChannel(image("player_right_1.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 0);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
             animIdleUp = new AnimationChannel(image("player_up_1.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 0);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
             animIdleLeft = new AnimationChannel(image("player_left_1.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 0);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
 
             animWalkDown = new AnimationChannel(image("player_down_1.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 2);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
             animWalkRight = new AnimationChannel(image("player_right_1.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 2);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
             animWalkUp = new AnimationChannel(image("player_up_1.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 2);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
             animWalkLeft = new AnimationChannel(image("player_left_1.png"), 3, 60, 60,
-                    Duration.seconds(0.5), 0, 2);
+                    Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
         }
     }
 
@@ -227,12 +228,12 @@ public class PlayerComponent extends Component {
             return;
         }
         bombsPlaced++;
-        int bombLocationX = (int) (entity.getX() % 64 > 32
-                ? entity.getX() + 64 - entity.getX() % 64 + 1
-                : entity.getX() - entity.getX() % 64 + 1);
-        int bombLocationY = (int) (entity.getY() % 64 > 32
-                ? entity.getY() + 64 - entity.getY() % 64 + 1
-                : entity.getY() - entity.getY() % 64 + 1);
+        int bombLocationX = (int) (entity.getX() % SIZE > 32
+                ? entity.getX() + SIZE - entity.getX() % SIZE + 1
+                : entity.getX() - entity.getX() % SIZE + 1);
+        int bombLocationY = (int) (entity.getY() % SIZE > 32
+                ? entity.getY() + SIZE - entity.getY() % SIZE + 1
+                : entity.getY() - entity.getY() % SIZE + 1);
 
         Entity bomb = spawn("bomb", new SpawnData(bombLocationX, bombLocationY));
 
