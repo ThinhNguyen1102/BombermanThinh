@@ -74,8 +74,8 @@ public class BombermanApp extends GameApplication {
 
     @Override
     protected void onPreInit() {
-        getSettings().setGlobalSoundVolume(sound_enabled ? 0.2 : 0.0);
-        getSettings().setGlobalMusicVolume(sound_enabled ? 0.5 : 0.0);
+        getSettings().setGlobalSoundVolume(sound_enabled ? 0.3 : 0.0);
+        getSettings().setGlobalMusicVolume(sound_enabled ? 0.3 : 0.0);
         loopBGM("title_screen.mp3");
     }
 

@@ -65,8 +65,8 @@ public class BombermanGameMenu extends FXGLMenu {
 
     private void setSoundEnabled() {
         BombermanApp.sound_enabled = !BombermanApp.sound_enabled;
-        getSettings().setGlobalMusicVolume(BombermanApp.sound_enabled ? 0.2 : 0.0);
-        getSettings().setGlobalSoundVolume(BombermanApp.sound_enabled ? 0.5 : 0.0);
+        getSettings().setGlobalMusicVolume(BombermanApp.sound_enabled ? 0.3 : 0.0);
+        getSettings().setGlobalSoundVolume(BombermanApp.sound_enabled ? 0.3 : 0.0);
         if (BombermanApp.sound_enabled) {
             showMessage("Sound enabled!");
         } else {
