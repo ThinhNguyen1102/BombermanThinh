@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGL.centerTextBind;
@@ -18,8 +20,9 @@ import static com.almasb.fxgl.dsl.FXGL.centerTextBind;
 public class BombermanGameMenu extends FXGLMenu {
     public BombermanGameMenu() {
         super(MenuType.GAME_MENU);
-//        Shape shape = new Rectangle(704, 704, Color.WHITE);
-//        getContentRoot().getChildren().add(shape);
+        Shape shape = new Rectangle(704, 704, Color.GREY);
+        shape.setOpacity(0.5);
+        getContentRoot().getChildren().add(shape);
 
         // UI background
         ImageView iv1 = new ImageView();
