@@ -46,6 +46,7 @@ public class BombermanFactory implements EntityFactory {
 
         return FXGL.entityBuilder(data)
                 .type(BombermanType.PLAYER)
+                // cần đổi
                 .viewWithBBox(new Circle(32, 32, 30, Color.WHITE))
                 .with(physics)
                 .with(new PlayerComponent())
@@ -83,6 +84,7 @@ public class BombermanFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(BombermanType.BRICK_BREAK)
                 .with(new BrickBreakComponent())
+                // cần đổi
                 .viewWithBBox(new Rectangle(SIZE - 4, SIZE - 4, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
                 .zIndex(1)
@@ -102,10 +104,11 @@ public class BombermanFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(BombermanType.FIRE)
                 .with(new FlameComponent())
+                // cần đổi
                 .viewWithBBox(new Rectangle(SIZE - 4, SIZE - 4, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
                 .with(new CollidableComponent(true))
-                .zIndex(-1)
+                .zIndex(1)
                 .build();
     }
 
@@ -120,7 +123,7 @@ public class BombermanFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("bombItem")
+    @Spawns("bombsItem")
     public Entity newBombItem(SpawnData data) {
         return FXGL.entityBuilder(data)
                 .type(BombermanType.BOMB_ITEM)

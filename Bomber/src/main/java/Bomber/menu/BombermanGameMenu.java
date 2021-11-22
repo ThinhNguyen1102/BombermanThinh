@@ -73,6 +73,4 @@ public class BombermanGameMenu extends FXGLMenu {
             showMessage("Sound disabled!");
         }
     }
-
-
 }

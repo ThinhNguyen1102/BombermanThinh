@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="180">
+ <tileset firstgid="1" name="classic" tilewidth="64" tileheight="64" tilecount="256" columns="16">
+  <image source="classic.png" trans="ff00ff" width="1024" height="1024"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="31" height="15">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,
+6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
+6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,
+6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,
+6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,
+6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,
+6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,
+6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,
+6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,
+6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,
+6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,
+6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,7,6,
+6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,
+6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6
+</data>
+ </layer>
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="13" type="player" x="64" y="192" width="64" height="64"/>
+  <object id="14" type="brick" x="192" y="256" width="64" height="64"/>
+  <object id="17" type="brick" x="256" y="320" width="64" height="64"/>
+  <object id="18" type="brick" x="192" y="384" width="64" height="64"/>
+  <object id="19" type="brick" x="64" y="448" width="64" height="64"/>
+  <object id="20" type="brick" x="192" y="576" width="64" height="64"/>
+  <object id="21" type="brick" x="320" y="640" width="64" height="64"/>
+  <object id="22" type="brick" x="64" y="704" width="64" height="64"/>
+  <object id="23" type="brick" x="192" y="768" width="64" height="64"/>
+  <object id="24" type="brick" x="384" y="704" width="64" height="64"/>
+  <object id="25" type="brick" x="320" y="768" width="64" height="64"/>
+  <object id="26" type="brick" x="256" y="832" width="64" height="64"/>
+  <object id="27" type="brick" x="448" y="576" width="64" height="64"/>
+  <object id="28" type="brick" x="320" y="448" width="64" height="64"/>
+  <object id="29" type="brick" x="448" y="320" width="64" height="64"/>
+  <object id="30" type="brick" x="512" y="448" width="64" height="64"/>
+  <object id="31" type="brick" x="640" y="320" width="64" height="64"/>
+  <object id="32" type="brick" x="576" y="256" width="64" height="64"/>
+  <object id="33" type="brick" x="576" y="384" width="64" height="64"/>
+  <object id="34" type="brick" x="704" y="192" width="64" height="64"/>
+  <object id="35" type="brick" x="768" y="320" width="64" height="64"/>
+  <object id="36" type="brick" x="704" y="448" width="64" height="64"/>
+  <object id="37" type="brick" x="832" y="448" width="64" height="64"/>
+  <object id="38" type="brick" x="640" y="576" width="64" height="64"/>
+  <object id="39" type="brick" x="512" y="832" width="64" height="64"/>
+  <object id="40" type="brick" x="704" y="704" width="64" height="64"/>
+  <object id="41" type="brick" x="832" y="832" width="64" height="64"/>
+  <object id="80" type="brick" x="960" y="832" width="64" height="64"/>
+  <object id="81" type="brick" x="704" y="576" width="64" height="64"/>
+  <object id="82" type="brick" x="704" y="832" width="64" height="64"/>
+  <object id="83" type="brick" x="704" y="576" width="64" height="64"/>
+  <object id="95" type="brick" x="704" y="576" width="64" height="64"/>
+  <object id="42" type="brick" x="896" y="704" width="64" height="64"/>
+  <object id="43" type="brick" x="960" y="640" width="64" height="64"/>
+  <object id="46" type="brick" x="768" y="576" width="64" height="64"/>
+  <object id="47" type="brick" x="960" y="512" width="64" height="64"/>
+  <object id="48" type="brick" x="1088" y="384" width="64" height="64"/>
+  <object id="49" type="brick" x="1088" y="256" width="64" height="64"/>
+  <object id="50" type="brick" x="1216" y="192" width="64" height="64"/>
+  <object id="51" type="brick" x="1216" y="384" width="64" height="64"/>
+  <object id="67" type="brick" x="1152" y="320" width="64" height="64"/>
+  <object id="52" type="brick" x="896" y="192" width="64" height="64"/>
+  <object id="53" type="brick" x="1024" y="192" width="64" height="64"/>
+  <object id="54" type="brick" x="960" y="320" width="64" height="64"/>
+  <object id="55" type="brick" x="1088" y="576" width="64" height="64"/>
+  <object id="44" type="brick" x="960" y="768" width="64" height="64"/>
+  <object id="45" type="brick" x="1024" y="704" width="64" height="64"/>
+  <object id="56" type="brick" x="1216" y="832" width="64" height="64"/>
+  <object id="57" type="brick" x="1344" y="704" width="64" height="64"/>
+  <object id="58" type="brick" x="1280" y="576" width="64" height="64"/>
+  <object id="59" type="brick" x="1408" y="576" width="64" height="64"/>
+  <object id="60" type="brick" x="1344" y="448" width="64" height="64"/>
+  <object id="68" type="brick" x="1536" y="576" width="64" height="64"/>
+  <object id="70" type="brick" x="1472" y="832" width="64" height="64"/>
+  <object id="84" type="brick" x="1344" y="832" width="64" height="64"/>
+  <object id="85" type="brick" x="1408" y="832" width="64" height="64"/>
+  <object id="71" type="brick" x="1600" y="704" width="64" height="64"/>
+  <object id="72" type="brick" x="1728" y="832" width="64" height="64"/>
+  <object id="73" type="brick" x="1856" y="704" width="64" height="64"/>
+  <object id="74" type="brick" x="1856" y="512" width="64" height="64"/>
+  <object id="75" type="brick" x="1856" y="320" width="64" height="64"/>
+  <object id="76" type="brick" x="1728" y="256" width="64" height="64"/>
+  <object id="78" type="brick" x="1856" y="192" width="64" height="64"/>
+  <object id="79" type="brick" x="1728" y="576" width="64" height="64"/>
+  <object id="77" type="brick" x="1600" y="384" width="64" height="64"/>
+  <object id="69" type="brick" x="1472" y="640" width="64" height="64"/>
+  <object id="61" type="brick" x="1408" y="192" width="64" height="64"/>
+  <object id="86" type="brick" x="1472" y="192" width="64" height="64"/>
+  <object id="87" type="brick" x="1536" y="192" width="64" height="64"/>
+  <object id="88" type="brick" x="1600" y="192" width="64" height="64"/>
+  <object id="62" type="brick" x="1472" y="320" width="64" height="64"/>
+  <object id="63" type="brick" x="1408" y="320" width="64" height="64"/>
+  <object id="64" type="brick" x="1472" y="256" width="64" height="64"/>
+  <object id="65" type="brick" x="1536" y="320" width="64" height="64"/>
+  <object id="66" type="brick" x="1472" y="384" width="64" height="64"/>
+  <object id="16" type="brick" x="256" y="192" width="64" height="64"/>
+  <object id="101" type="wall" x="128" y="256" width="64" height="64"/>
+  <object id="102" type="wall" x="256" y="256" width="64" height="64"/>
+  <object id="103" type="wall" x="128" y="384" width="64" height="64"/>
+  <object id="104" type="wall" x="256" y="384" width="64" height="64"/>
+  <object id="105" type="wall" x="256" y="512" width="64" height="64"/>
+  <object id="115" type="wall" x="512" y="512" width="64" height="64"/>
+  <object id="116" type="wall" x="384" y="384" width="64" height="64"/>
+  <object id="119" type="wall" x="512" y="384" width="64" height="64"/>
+  <object id="120" type="wall" x="640" y="768" width="64" height="64"/>
+  <object id="121" type="wall" x="640" y="640" width="64" height="64"/>
+  <object id="122" type="wall" x="640" y="512" width="64" height="64"/>
+  <object id="123" type="wall" x="640" y="384" width="64" height="64"/>
+  <object id="124" type="wall" x="640" y="256" width="64" height="64"/>
+  <object id="127" type="wall" x="768" y="768" width="64" height="64"/>
+  <object id="128" type="wall" x="768" y="640" width="64" height="64"/>
+  <object id="129" type="wall" x="768" y="512" width="64" height="64"/>
+  <object id="130" type="wall" x="768" y="384" width="64" height="64"/>
+  <object id="131" type="wall" x="768" y="256" width="64" height="64"/>
+  <object id="132" type="wall" x="896" y="768" width="64" height="64"/>
+  <object id="133" type="wall" x="896" y="640" width="64" height="64"/>
+  <object id="134" type="wall" x="896" y="512" width="64" height="64"/>
+  <object id="135" type="wall" x="896" y="384" width="64" height="64"/>
+  <object id="136" type="wall" x="896" y="256" width="64" height="64"/>
+  <object id="137" type="wall" x="1024" y="768" width="64" height="64"/>
+  <object id="138" type="wall" x="1024" y="640" width="64" height="64"/>
+  <object id="139" type="wall" x="1024" y="512" width="64" height="64"/>
+  <object id="140" type="wall" x="1024" y="384" width="64" height="64"/>
+  <object id="141" type="wall" x="1024" y="256" width="64" height="64"/>
+  <object id="142" type="wall" x="1152" y="768" width="64" height="64"/>
+  <object id="143" type="wall" x="1152" y="640" width="64" height="64"/>
+  <object id="144" type="wall" x="1152" y="512" width="64" height="64"/>
+  <object id="145" type="wall" x="1152" y="384" width="64" height="64"/>
+  <object id="146" type="wall" x="1152" y="256" width="64" height="64"/>
+  <object id="147" type="wall" x="1280" y="768" width="64" height="64"/>
+  <object id="148" type="wall" x="1280" y="640" width="64" height="64"/>
+  <object id="149" type="wall" x="1280" y="512" width="64" height="64"/>
+  <object id="150" type="wall" x="1280" y="384" width="64" height="64"/>
+  <object id="151" type="wall" x="1408" y="256" width="64" height="64"/>
+  <object id="157" type="wall" x="1536" y="768" width="64" height="64"/>
+  <object id="158" type="wall" x="1536" y="640" width="64" height="64"/>
+  <object id="159" type="wall" x="1536" y="512" width="64" height="64"/>
+  <object id="160" type="wall" x="1536" y="384" width="64" height="64"/>
+  <object id="161" type="wall" x="1536" y="256" width="64" height="64"/>
+  <object id="162" type="wall" x="1664" y="768" width="64" height="64"/>
+  <object id="163" type="wall" x="1664" y="640" width="64" height="64"/>
+  <object id="164" type="wall" x="1664" y="512" width="64" height="64"/>
+  <object id="165" type="wall" x="1664" y="384" width="64" height="64"/>
+  <object id="166" type="wall" x="1664" y="256" width="64" height="64"/>
+  <object id="167" type="wall" x="1792" y="768" width="64" height="64"/>
+  <object id="168" type="wall" x="1792" y="640" width="64" height="64"/>
+  <object id="169" type="wall" x="1792" y="512" width="64" height="64"/>
+  <object id="170" type="wall" x="1792" y="384" width="64" height="64"/>
+  <object id="171" type="wall" x="1792" y="256" width="64" height="64"/>
+  <object id="152" type="wall" x="1408" y="768" width="64" height="64"/>
+  <object id="153" type="wall" x="1408" y="640" width="64" height="64"/>
+  <object id="154" type="wall" x="1408" y="512" width="64" height="64"/>
+  <object id="155" type="wall" x="1408" y="384" width="64" height="64"/>
+  <object id="156" type="wall" x="1280" y="256" width="64" height="64"/>
+  <object id="126" type="wall" x="512" y="256" width="64" height="64"/>
+  <object id="118" type="wall" x="384" y="256" width="64" height="64"/>
+  <object id="117" type="wall" x="384" y="512" width="64" height="64"/>
+  <object id="106" type="wall" x="128" y="512" width="64" height="64"/>
+  <object id="107" type="wall" x="128" y="640" width="64" height="64"/>
+  <object id="108" type="wall" x="256" y="640" width="64" height="64"/>
+  <object id="109" type="wall" x="128" y="768" width="64" height="64"/>
+  <object id="110" type="wall" x="256" y="768" width="64" height="64"/>
+  <object id="111" type="wall" x="384" y="768" width="64" height="64"/>
+  <object id="112" type="wall" x="512" y="640" width="64" height="64"/>
+  <object id="113" type="wall" x="512" y="768" width="64" height="64"/>
+  <object id="114" type="wall" x="384" y="640" width="64" height="64"/>
+  <object id="172" type="wall" x="0" y="64" width="64" height="896"/>
+  <object id="173" type="wall" x="64" y="896" width="1920" height="64"/>
+  <object id="174" type="wall" x="64" y="128" width="1856" height="64"/>
+  <object id="175" type="wall" x="1920" y="64" width="64" height="832"/>
+ </objectgroup>
+ <objectgroup id="4" name="Object Layer 2">
+  <object id="89" type="speedItem" x="455" y="327" width="50" height="50"/>
+  <object id="92" type="bombsItem" x="391" y="711" width="50" height="50"/>
+  <object id="90" type="flameItem" x="711" y="199" width="50" height="50"/>
+  <object id="93" type="flamePassItem" x="775" y="839" width="50" height="50"/>
+  <object id="96" type="speedItem" x="711" y="583" width="50" height="50"/>
+  <object id="97" type="bombsItem" x="1543" y="199" width="50" height="50"/>
+  <object id="98" type="flamePassItem" x="1543" y="583" width="50" height="50"/>
+  <object id="99" type="portal" x="1863" y="519" width="50" height="50"/>
+  <object id="100" type="speedItem" x="1097" y="391" width="50" height="50"/>
+ </objectgroup>
+</map>

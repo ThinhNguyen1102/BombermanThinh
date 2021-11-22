@@ -17,7 +17,8 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 import static Bomber.Constants.GameConst.*;
 
 public class PlayerComponent extends Component {
-    public static final double ANIM_TIME_PLAYER = 0.5;
+    private static final double ANIM_TIME_PLAYER = 0.5;
+    private static final int SIZE_P = 60;
     private int bombsPlaced = 0;
     public enum MoveDirection {
         UP, RIGHT, DOWN, LEFT, STOP,DIE
@@ -89,46 +90,46 @@ public class PlayerComponent extends Component {
 
     public void setAnimation(AnimationSkin animation) {
         if (animation == AnimationSkin.NORMAL) {
-            animDie = new AnimationChannel(image("player_die.png"), 3, 60, 60,
+            animDie = new AnimationChannel(image("player_die.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(1.8), 0, 2);
 
-            animIdleDown = new AnimationChannel(image("player_down.png"), 3, 60, 60,
+            animIdleDown = new AnimationChannel(image("player_down.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleRight = new AnimationChannel(image("player_right.png"), 3, 60, 60,
+            animIdleRight = new AnimationChannel(image("player_right.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleUp = new AnimationChannel(image("player_up.png"), 3, 60, 60,
+            animIdleUp = new AnimationChannel(image("player_up.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleLeft = new AnimationChannel(image("player_left.png"), 3, 60, 60,
+            animIdleLeft = new AnimationChannel(image("player_left.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
 
-            animWalkDown = new AnimationChannel(image("player_down.png"), 3, 60, 60,
+            animWalkDown = new AnimationChannel(image("player_down.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkRight = new AnimationChannel(image("player_right.png"), 3, 60, 60,
+            animWalkRight = new AnimationChannel(image("player_right.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkUp = new AnimationChannel(image("player_up.png"), 3, 60, 60,
+            animWalkUp = new AnimationChannel(image("player_up.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkLeft = new AnimationChannel(image("player_left.png"), 3, 60, 60,
+            animWalkLeft = new AnimationChannel(image("player_left.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
         } else {
-            animDie = new AnimationChannel(image("player_die.png"), 3, 60, 60,
+            animDie = new AnimationChannel(image("player_die.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(1.8), 0, 2);
 
-            animIdleDown = new AnimationChannel(image("player_down_1.png"), 3, 60, 60,
+            animIdleDown = new AnimationChannel(image("player_down_1.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleRight = new AnimationChannel(image("player_right_1.png"), 3, 60, 60,
+            animIdleRight = new AnimationChannel(image("player_right_1.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleUp = new AnimationChannel(image("player_up_1.png"), 3, 60, 60,
+            animIdleUp = new AnimationChannel(image("player_up_1.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleLeft = new AnimationChannel(image("player_left_1.png"), 3, 60, 60,
+            animIdleLeft = new AnimationChannel(image("player_left_1.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
 
-            animWalkDown = new AnimationChannel(image("player_down_1.png"), 3, 60, 60,
+            animWalkDown = new AnimationChannel(image("player_down_1.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkRight = new AnimationChannel(image("player_right_1.png"), 3, 60, 60,
+            animWalkRight = new AnimationChannel(image("player_right_1.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkUp = new AnimationChannel(image("player_up_1.png"), 3, 60, 60,
+            animWalkUp = new AnimationChannel(image("player_up_1.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkLeft = new AnimationChannel(image("player_left_1.png"), 3, 60, 60,
+            animWalkLeft = new AnimationChannel(image("player_left_1.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
         }
     }
@@ -228,6 +229,7 @@ public class PlayerComponent extends Component {
             return;
         }
         bombsPlaced++;
+        // cần sửa
         int bombLocationX = (int) (entity.getX() % SIZE > 32
                 ? entity.getX() + SIZE - entity.getX() % SIZE + 1
                 : entity.getX() - entity.getX() % SIZE + 1);

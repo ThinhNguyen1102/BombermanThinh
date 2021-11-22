@@ -91,6 +91,7 @@ public class BombermanApp extends GameApplication {
 
     @Override
     protected void initUI() {
+        // đổi
         Label scoreLabel = new Label();
         scoreLabel.setTextFill(Color.BLACK);
         scoreLabel.setFont(Font.font(20.0));
