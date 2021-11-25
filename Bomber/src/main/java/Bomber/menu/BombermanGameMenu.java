@@ -20,7 +20,7 @@ import static com.almasb.fxgl.dsl.FXGL.centerTextBind;
 public class BombermanGameMenu extends FXGLMenu {
     public BombermanGameMenu() {
         super(MenuType.GAME_MENU);
-        Shape shape = new Rectangle(704, 704, Color.GREY);
+        Shape shape = new Rectangle(720, 720, Color.GREY);
         shape.setOpacity(0.5);
         getContentRoot().getChildren().add(shape);
 
@@ -65,8 +65,8 @@ public class BombermanGameMenu extends FXGLMenu {
 
     private void setSoundEnabled() {
         BombermanApp.sound_enabled = !BombermanApp.sound_enabled;
-        getSettings().setGlobalMusicVolume(BombermanApp.sound_enabled ? 0.3 : 0.0);
-        getSettings().setGlobalSoundVolume(BombermanApp.sound_enabled ? 0.3 : 0.0);
+        getSettings().setGlobalMusicVolume(BombermanApp.sound_enabled ? 0.1 : 0.0);
+        getSettings().setGlobalSoundVolume(BombermanApp.sound_enabled ? 0.1 : 0.0);
         if (BombermanApp.sound_enabled) {
             showMessage("Sound enabled!");
         } else {

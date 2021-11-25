@@ -18,7 +18,7 @@ import static Bomber.Constants.GameConst.*;
 
 public class PlayerComponent extends Component {
     private static final double ANIM_TIME_PLAYER = 0.5;
-    private static final int SIZE_P = 60;
+    private static final int SIZE_P = 45;
     private int bombsPlaced = 0;
     public enum MoveDirection {
         UP, RIGHT, DOWN, LEFT, STOP,DIE
@@ -230,10 +230,10 @@ public class PlayerComponent extends Component {
         }
         bombsPlaced++;
         // cần sửa
-        int bombLocationX = (int) (entity.getX() % SIZE > 32
+        int bombLocationX = (int) (entity.getX() % SIZE > 24
                 ? entity.getX() + SIZE - entity.getX() % SIZE + 1
                 : entity.getX() - entity.getX() % SIZE + 1);
-        int bombLocationY = (int) (entity.getY() % SIZE > 32
+        int bombLocationY = (int) (entity.getY() % SIZE > 24
                 ? entity.getY() + SIZE - entity.getY() % SIZE + 1
                 : entity.getY() - entity.getY() % SIZE + 1);
 

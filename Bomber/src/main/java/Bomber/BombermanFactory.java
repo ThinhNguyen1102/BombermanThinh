@@ -1,9 +1,6 @@
 package Bomber;
 
-import Bomber.Components.BombComponent;
-import Bomber.Components.BrickBreakComponent;
-import Bomber.Components.FlameComponent;
-import Bomber.Components.PlayerComponent;
+import Bomber.Components.*;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
@@ -29,7 +26,7 @@ public class BombermanFactory implements EntityFactory {
     @Spawns("background")
     public Entity newBackground(SpawnData data) {
         return FXGL.entityBuilder(data)
-                .view(new Rectangle(GAME_WORLD_WIDTH, GAME_WORLD_HEIGHT, Color.GREEN))
+                .view(new Rectangle(GAME_WORLD_WIDTH, GAME_WORLD_HEIGHT, Color.LIGHTGRAY))
                 .zIndex(-100)
                 .with(new IrremovableComponent())
                 .build();
@@ -47,7 +44,7 @@ public class BombermanFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(BombermanType.PLAYER)
                 // cần đổi
-                .viewWithBBox(new Circle(32, 32, 30, Color.WHITE))
+                .viewWithBBox(new Circle(24, 24, 22, Color.WHITE))
                 .with(physics)
                 .with(new PlayerComponent())
                 .with(new PhysicsComponent())
@@ -79,13 +76,47 @@ public class BombermanFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("grass")
+    public Entity newGrass(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .type(BombermanType.GRASS)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"),
+                        data.<Integer>get("height"))))
+                .view("grass.png")
+                .with(new PhysicsComponent())
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
+    @Spawns("grass_break")
+    public Entity newGrassBreak(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .type(BombermanType.GRASS_BREAK)
+                .with(new GrassBreakComponent())
+                .viewWithBBox(new Rectangle(SIZE - 3, SIZE - 3, Color.TRANSPARENT))
+                .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
+                .zIndex(1)
+                .build();
+    }
+
+    @Spawns("coral")
+    public Entity newCoral(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .type(BombermanType.CORAL)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"),
+                        data.<Integer>get("height"))))
+                .view("coral.png")
+                .with(new PhysicsComponent())
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
     @Spawns("brick_break")
     public Entity newBrickBreak(SpawnData data) {
         return FXGL.entityBuilder(data)
                 .type(BombermanType.BRICK_BREAK)
                 .with(new BrickBreakComponent())
-                // cần đổi
-                .viewWithBBox(new Rectangle(SIZE - 4, SIZE - 4, Color.TRANSPARENT))
+                .viewWithBBox(new Rectangle(SIZE - 3, SIZE - 3, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
                 .zIndex(1)
                 .build();
@@ -105,7 +136,7 @@ public class BombermanFactory implements EntityFactory {
                 .type(BombermanType.FIRE)
                 .with(new FlameComponent())
                 // cần đổi
-                .viewWithBBox(new Rectangle(SIZE - 4, SIZE - 4, Color.TRANSPARENT))
+                .viewWithBBox(new Rectangle(SIZE - 3, SIZE - 3, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
                 .with(new CollidableComponent(true))
                 .zIndex(1)

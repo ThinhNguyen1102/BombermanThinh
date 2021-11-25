@@ -7,17 +7,18 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.SceneFactory;
-import com.almasb.fxgl.app.scene.SimpleGameMenu;
 import com.almasb.fxgl.app.scene.Viewport;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
+import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.PhysicsWorld;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import org.jetbrains.annotations.NotNull;
+import javafx.scene.text.FontWeight;
 
 import java.util.Map;
 
@@ -36,6 +37,8 @@ public class BombermanApp extends GameApplication {
         gameSettings.setIntroEnabled(false);
         gameSettings.setMainMenuEnabled(true);
         gameSettings.setGameMenuEnabled(true);
+        gameSettings.setPreserveResizeRatio(true);
+        gameSettings.setManualResizeEnabled(true);
         gameSettings.setFontUI("Quinquefive-Ea6d4.ttf");
         gameSettings.setSceneFactory(new SceneFactory() {
             @Override
@@ -54,13 +57,8 @@ public class BombermanApp extends GameApplication {
     @Override
     protected void initGame() {
         FXGL.getGameWorld().addEntityFactory(new BombermanFactory());
+        nextLevel();
         FXGL.spawn("background");
-        FXGL.setLevelFromMap("level1.tmx");
-
-        Viewport viewport = getGameScene().getViewport();
-        viewport.setBounds(0, 0, GAME_WORLD_WIDTH, GAME_WORLD_HEIGHT);
-        viewport.bindToEntity(getPlayer(), getAppWidth() / 2, getAppHeight() / 2);
-        viewport.setLazy(true);
     }
 
     @Override
@@ -70,12 +68,13 @@ public class BombermanApp extends GameApplication {
         vars.put("score", 0);
         vars.put("speed", SPEED);
         vars.put("levelTime", TIME_LEVEL);
+        vars.put("level", START_LEVEL);
     }
 
     @Override
     protected void onPreInit() {
-        getSettings().setGlobalSoundVolume(sound_enabled ? 0.3 : 0.0);
-        getSettings().setGlobalMusicVolume(sound_enabled ? 0.3 : 0.0);
+        getSettings().setGlobalSoundVolume(sound_enabled ? 0.1 : 0.0);
+        getSettings().setGlobalMusicVolume(sound_enabled ? 0.1 : 0.0);
         loopBGM("title_screen.mp3");
     }
 
@@ -91,36 +90,44 @@ public class BombermanApp extends GameApplication {
 
     @Override
     protected void initUI() {
-        // đổi
-        Label scoreLabel = new Label();
-        scoreLabel.setTextFill(Color.BLACK);
-        scoreLabel.setFont(Font.font(20.0));
-        scoreLabel.textProperty().bind(FXGL.getip("score").asString("Score: %d"));
-        FXGL.addUINode(scoreLabel, 20, 10);
+//        Label score = setTextUI("score", "Score: %d", ValType.INT);
+//        Label speed = setTextUI("score", "Score: %d", ValType.INT);
+//        Label flame = setTextUI("score", "Score: %d", ValType.INT);
+//        Label bomb = setTextUI("score", "Score: %d", ValType.INT);
+//        Label levelTime = setTextUI("score", "Score: %d", ValType.INT);
+//
+//        HBox box = new HBox();
+//        box.setAlignment(Pos.CENTER);
+//        box.getChildren().addAll(score, speed, flame, bomb, levelTime);
+//        box.getStylesheets().add(getClass().getResource("/assets/ui/fonts/Style.css").toExternalForm());
+//        FXGL.addUINode(box, 0, 0);
 
-        Label speedLabel = new Label();
-        speedLabel.setTextFill(Color.BLACK);
-        speedLabel.setFont(Font.font(20.0));
-        speedLabel.textProperty().bind(FXGL.getip("speed").asString("Speed: %d"));
-        FXGL.addUINode(speedLabel, 120, 10);
+        FXGL.addUINode(setTextUI("score", "Score: %d", ValType.INT), 20, 30);
 
-        Label flameLabel = new Label();
-        flameLabel.setTextFill(Color.BLACK);
-        flameLabel.setFont(Font.font(20.0));
-        flameLabel.textProperty().bind(FXGL.getip("flame").asString("Flame: %d"));
-        FXGL.addUINode(flameLabel, 320, 10);
+        FXGL.addUINode(setTextUI("speed", "Speed: %d", ValType.INT), 140, 30);
 
-        Label bombsLabel = new Label();
-        bombsLabel.setTextFill(Color.BLACK);
-        bombsLabel.setFont(Font.font(20.0));
-        bombsLabel.textProperty().bind(FXGL.getip("bomb").asString("Bombs: %d"));
-        FXGL.addUINode(bombsLabel, 420, 10);
+        FXGL.addUINode(setTextUI("flame", "Flame: %d", ValType.INT), 280, 30);
 
-        Label timeLabel = new Label();
-        timeLabel.setTextFill(Color.BLACK);
-        timeLabel.setFont(Font.font(20.0));
-        timeLabel.textProperty().bind(FXGL.getdp("levelTime").asString("Time: %.0f"));
-        FXGL.addUINode(timeLabel, 520, 10);
+        FXGL.addUINode(setTextUI("bomb", "Bombs: %d", ValType.INT), 390, 30);
+
+        FXGL.addUINode(setTextUI("levelTime", "Time: %.0f", ValType.DOUBLE), 500, 30);
+    }
+
+    private Label setTextUI(String valGame, String content, ValType valType) {
+        Label label = new Label();
+        label.setTextFill(Color.BLACK);
+        label.setFont(Font.font("Comic Sans MS", FontWeight.EXTRA_BOLD, 20));
+        DropShadow shadow = new DropShadow();
+        shadow.setColor(Color.LIGHTGREEN);
+        label.setEffect(shadow);
+        if (valType == ValType.INT) {
+            label.textProperty().bind(FXGL.getip(valGame).asString(content));
+        } else if (valType == ValType.DOUBLE){
+            label.textProperty().bind(FXGL.getdp(valGame).asString(content));
+        } else {
+            label.setText("Error");
+        }
+        return label;
     }
 
     private static Entity getPlayer() {
@@ -189,7 +196,34 @@ public class BombermanApp extends GameApplication {
     protected void initPhysics() {
         PhysicsWorld physics = getPhysicsWorld();
         physics.setGravity(0, 0);
+
+        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.PORTAL) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity portal) {
+                nextLevel();
+                set("levelTime", TIME_LEVEL);
+            }
+        });
     }
+
+    private void nextLevel() {
+        if (FXGL.geti("level") == MAX_LEVEL) {
+            showMessage("You win !!!");
+            return;
+        }
+
+        inc("level", +1);
+        setLevel();
+    }
+
+    private void setLevel() {
+        FXGL.setLevelFromMap("bbm_level" + FXGL.geti("level") + ".tmx");
+        Viewport viewport = getGameScene().getViewport();
+        viewport.setBounds(0, 0, GAME_WORLD_WIDTH, GAME_WORLD_HEIGHT);
+        viewport.bindToEntity(getPlayer(), getAppWidth() / 2, getAppHeight() / 2);
+        viewport.setLazy(true);
+    }
+
 
     public static void main(String[] args) {
         launch(args);
