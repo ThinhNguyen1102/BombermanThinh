@@ -11,7 +11,6 @@ import com.almasb.fxgl.app.scene.Viewport;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
-import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.PhysicsWorld;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -62,6 +61,13 @@ public class BombermanApp extends GameApplication {
         FXGL.getGameWorld().addEntityFactory(new BombermanFactory());
         nextLevel();
         FXGL.spawn("background");
+
+        run(() -> inc("time", -1), Duration.seconds(1));
+        getWorldProperties().<Integer>addListener("time", (old, now) -> {
+            if (now == 0) {
+                onPlayerKilled();
+            }
+        });
     }
 
     @Override
@@ -70,7 +76,7 @@ public class BombermanApp extends GameApplication {
         vars.put("flame", 1);
         vars.put("score", 0);
         vars.put("speed", SPEED);
-        vars.put("levelTime", TIME_LEVEL);
+        vars.put("time", TIME_PER_SECONDS);
         vars.put("level", START_LEVEL);
     }
 
@@ -83,11 +89,8 @@ public class BombermanApp extends GameApplication {
 
     @Override
     protected void onUpdate(double tpf) {
-        inc("levelTime", -tpf);
 
-        if (getd("levelTime") <= 0.0) {
-//            showMessage("you lose");
-//            set("levelTime", TIME_LEVEL);
+        if (geti("time") == 0) {
             getDialogService().showMessageBox("Game Over!!!", getGameController()::startNewGame);
         }
 
@@ -95,10 +98,10 @@ public class BombermanApp extends GameApplication {
             requestNewGame = false;
             getPlayer().getComponent(PlayerComponent.class).die();
             getGameTimer().runOnceAfter(() -> {
-                getGameScene().getViewport().flash(() -> {
+                getGameScene().getViewport().fade(() -> {
                     setLevel();
                 });
-            }, Duration.seconds(1));
+            }, Duration.seconds(0.5));
         }
     }
 
@@ -116,31 +119,26 @@ public class BombermanApp extends GameApplication {
 //        box.getStylesheets().add(getClass().getResource("/assets/ui/fonts/Style.css").toExternalForm());
 //        FXGL.addUINode(box, 0, 0);
 
-        FXGL.addUINode(setTextUI("score", "Score: %d", ValType.INT), 20, 30);
+        FXGL.addUINode(setTextUI("score", "Score: %d"), 20, 30);
 
-        FXGL.addUINode(setTextUI("speed", "Speed: %d", ValType.INT), 140, 30);
+        FXGL.addUINode(setTextUI("speed", "Speed: %d"), 140, 30);
 
-        FXGL.addUINode(setTextUI("flame", "Flame: %d", ValType.INT), 280, 30);
+        FXGL.addUINode(setTextUI("flame", "Flame: %d"), 280, 30);
 
-        FXGL.addUINode(setTextUI("bomb", "Bombs: %d", ValType.INT), 390, 30);
+        FXGL.addUINode(setTextUI("bomb", "Bombs: %d"), 390, 30);
 
-        FXGL.addUINode(setTextUI("levelTime", "Time: %.0f", ValType.DOUBLE), 500, 30);
+        FXGL.addUINode(setTextUI("time", "Time: %d"), 500, 30);
     }
 
-    private Label setTextUI(String valGame, String content, ValType valType) {
+    private Label setTextUI(String valGame, String content) {
         Label label = new Label();
         label.setTextFill(Color.BLACK);
         label.setFont(Font.font("Comic Sans MS", FontWeight.EXTRA_BOLD, 20));
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.LIGHTGREEN);
         label.setEffect(shadow);
-        if (valType == ValType.INT) {
-            label.textProperty().bind(FXGL.getip(valGame).asString(content));
-        } else if (valType == ValType.DOUBLE){
-            label.textProperty().bind(FXGL.getdp(valGame).asString(content));
-        } else {
-            label.setText("Error");
-        }
+        // valGame's datatype is int
+        label.textProperty().bind(FXGL.getip(valGame).asString(content));
         return label;
     }
 
@@ -217,7 +215,6 @@ public class BombermanApp extends GameApplication {
                     nextLevel();
                 });
             }, Duration.seconds(1));
-            set("levelTime", TIME_LEVEL);
         });
 
         onCollisionBegin(BombermanType.PLAYER, BombermanType.FIRE, (p, f) -> {
@@ -256,6 +253,7 @@ public class BombermanApp extends GameApplication {
         viewport.setBounds(0, 0, GAME_WORLD_WIDTH, GAME_WORLD_HEIGHT);
         viewport.bindToEntity(getPlayer(), getAppWidth() / 2, getAppHeight() / 2);
         viewport.setLazy(true);
+        set("time", TIME_PER_SECONDS);
     }
 
     public static void main(String[] args) {

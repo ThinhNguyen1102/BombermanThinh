@@ -125,7 +125,7 @@ public class PlayerComponent extends Component {
     public void setAnimation(AnimationSkin animation) {
         if (animation == AnimationSkin.NORMAL) {
             animDie = new AnimationChannel(image("player_die.png"), 3, SIZE_P, SIZE_P,
-                    Duration.seconds(1.8), 0, 2);
+                    Duration.seconds(1.5), 0, 2);
 
             animIdleDown = new AnimationChannel(image("player_down.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
@@ -146,7 +146,7 @@ public class PlayerComponent extends Component {
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
         } else {
             animDie = new AnimationChannel(image("player_die.png"), 3, SIZE_P, SIZE_P,
-                    Duration.seconds(1.8), 0, 2);
+                    Duration.seconds(1.5), 0, 2);
 
             animIdleDown = new AnimationChannel(image("player_down_1.png"), 3, SIZE_P, SIZE_P,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);

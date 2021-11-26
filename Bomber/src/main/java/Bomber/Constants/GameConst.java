@@ -11,6 +11,7 @@ public class GameConst {
 
     public static final int SPEED = 150;
     public static final double TIME_LEVEL = 100.0;
+    public static final int TIME_PER_SECONDS = 100;
     public static final int SCORE_BRICK = 10;
     public static final int SCORE_ITEM = 20;
     public static final int MAX_LEVEL = 3;
