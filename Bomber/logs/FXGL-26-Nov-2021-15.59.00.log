@@ -1,0 +1,85 @@
+15:58:58.741 [main                     ] DEBUG Logger               - Configured Logger
+15:58:58.741 [main                     ] DEBUG GameApplication      - Logging settings
+Title: BOMBERMAN
+Version: 1.0
+Width: 720
+Height: 720
+Fullscreen: false
+Intro: false
+Profiling: false
+Single step:false
+App Mode: DEVELOPER
+Menu Key: ESCAPE
+Stage Style: DECORATED
+Scene Factory: class Bomber.BombermanApp$1
+
+15:58:59.085 [JavaFX Application Thread] DEBUG FXGLApplication      - Initializing FXGL
+15:58:59.088 [JavaFX Application Thread] INFO  Engine               - FXGL-11.17 (16.07.2021 15.46) on WINDOWS (J:17.0.1 FX:16)
+15:58:59.088 [JavaFX Application Thread] DEBUG Engine               - JRE Vendor Name: Oracle Corporation
+15:58:59.088 [JavaFX Application Thread] DEBUG Engine               - Running on OS: Windows 10 version 10.0
+15:58:59.089 [JavaFX Application Thread] DEBUG Engine               - Architecture: amd64
+15:58:59.089 [JavaFX Application Thread] INFO  Engine               - Source code and latest versions at: https://github.com/AlmasB/FXGL
+15:58:59.089 [JavaFX Application Thread] INFO  Engine               -              Join the FXGL chat at: https://gitter.im/AlmasB/FXGL
+15:58:59.189 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Creating a JavaFX scene
+15:58:59.228 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Target settings size: 720.0 x 720.0
+15:58:59.228 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scaled scene size:    720.0 x 720.0
+15:58:59.228 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scaled ratio: (1.0, 1.0)
+15:58:59.229 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Set initial scene to FXGLStartupScene
+15:58:59.237 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Opening main window
+15:58:59.317 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Window border size: (14.4000244140625, 37.5999755859375)
+15:58:59.318 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scaled size: 720.0 x 720.0
+15:58:59.318 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scaled ratio: (1.0, 1.0)
+15:58:59.318 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scene size: 720.0 x 720.0
+15:58:59.318 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Stage size: 734.4000244140625 x 757.5999755859375
+15:58:59.326 [FXGL Background Thread 1 ] DEBUG Engine               - Initializing environment variables
+15:58:59.398 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - User app class for loading assets: class Bomber.BombermanApp
+15:58:59.399 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Applying CSS: fxgl_dark.css
+15:58:59.402 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/thinh/.m2/repository/com/github/almasb/fxgl/11.17/fxgl-11.17.jar!/fxglassets/ui/css/fxgl_dark.css
+15:58:59.458 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Initializing application scenes
+15:58:59.507 [FXGL Background Thread 1 ] DEBUG GameWorld            - Game world initialized
+15:58:59.572 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Physics world initialized: appHeight=720, physics.ppm=50.0
+15:58:59.572 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Using strategy: BRUTE_FORCE
+15:58:59.574 [FXGL Background Thread 1 ] DEBUG GameScene            - Game scene initialized: 720x720
+15:58:59.639 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Application scenes initialized
+15:58:59.648 [FXGL Background Thread 1 ] DEBUG SystemBundleService  - Loading FXGL system data
+15:58:59.656 [FXGL Background Thread 1 ] DEBUG FileSystemAccess     - Reading from: D:\Code\ProjectJavaFX\bomberman\Bomber\system\fxgl.bundle
+15:58:59.664 [FXGL Background Thread 1 ] DEBUG SystemBundleService  - Bundle FXGL: {}
+15:58:59.664 [FXGL Background Thread 1 ] DEBUG UpdaterService       - Checking for updates
+15:58:59.672 [FXGL Background Thread 4 ] DEBUG FXGLApplication      - Loading fonts
+15:58:59.673 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/Code/ProjectJavaFX/bomberman/Bomber/target/classes/assets/ui/fonts/Quinquefive-Ea6d4.ttf
+15:58:59.673 [FXGL Background Thread 1 ] DEBUG FXGLApplication      - Loading default localization
+15:58:59.673 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/thinh/.m2/repository/com/github/almasb/fxgl/11.17/fxgl-11.17.jar!/fxglassets/languages/english.lang
+15:58:59.693 [FXGL Background Thread 1 ] INFO  FXGLApplication      - FXGL initialization took: 0.367 sec
+15:58:59.707 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Move Up - W
+15:58:59.707 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Move Down - S
+15:58:59.707 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Move Left - A
+15:58:59.708 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Move Right - D
+15:58:59.708 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Place Bomb - Space
+15:58:59.708 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/D:/Code/ProjectJavaFX/bomberman/Bomber/target/classes/assets/music/title_screen.mp3
+15:58:59.788 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/thinh/.m2/repository/com/github/almasb/fxgl/11.17/fxgl-11.17.jar!/fxglassets/ui/fonts/Abel-Regular.ttf
+15:58:59.806 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/thinh/.m2/repository/com/github/almasb/fxgl/11.17/fxgl-11.17.jar!/fxglassets/ui/fonts/lucida_console.ttf
+15:58:59.828 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/thinh/.m2/repository/com/github/almasb/fxgl/11.17/fxgl-11.17.jar!/fxglassets/ui/fonts/Courier-Prime.ttf
+15:58:59.893 [JavaFX Application Thread] DEBUG AudioPlayer          - Playing music com.almasb.fxgl.audio.Music@414dc3a4
+15:58:59.893 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/thinh/.m2/repository/com/github/almasb/fxgl/11.17/fxgl-11.17.jar!/fxglassets/textures/fxgl_icon.png
+15:58:59.924 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/thinh/.m2/repository/com/github/almasb/fxgl/11.17/fxgl-11.17.jar!/fxglassets/textures/fxgl_default_cursor.png
+15:58:59.927 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Screenshot - CTRL+8
+15:58:59.927 [JavaFX Application Thread] DEBUG Input                - Registered new binding: System info dump - CTRL+9
+15:58:59.928 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Restart - CTRL+R
+15:58:59.928 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Toggle Debug Camera - CTRL+C
+15:58:59.931 [JavaFX Application Thread] DEBUG LoopRunner           - Starting loop
+15:58:59.931 [JavaFX Application Thread] DEBUG LoopRunner           - Initializing JavaFX AnimationTimerLoop
+15:58:59.935 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:58:59.942 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLStartupScene and adding to FXGLMainMenuDummyScene
+15:58:59.942 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLStartupScene -> FXGLMainMenuDummyScene
+15:58:59.942 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: BombermanMenu
+15:58:59.942 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:58:59.946 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLMainMenuDummyScene and adding to BombermanMenu
+15:58:59.947 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLMainMenuDummyScene -> BombermanMenu
+15:58:59.948 [JavaFX Application Thread] DEBUG FXGLApplication      - Registering font factories with UI factory
+15:59:00.870 [JavaFX Application Thread] DEBUG FXGLApplication      - Exiting FXGL
+15:59:00.870 [JavaFX Application Thread] DEBUG LoopRunner           - Stopping loop
+15:59:00.870 [JavaFX Application Thread] DEBUG SystemBundleService  - Saving FXGL system data
+15:59:00.871 [JavaFX Application Thread] DEBUG FileSystemAccess     - Writing to: D:\Code\ProjectJavaFX\bomberman\Bomber\system\fxgl.bundle
+15:59:00.872 [JavaFX Application Thread] DEBUG Async                - Shutting down background threads
+15:59:00.873 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Closing main window
+15:59:00.882 [JavaFX Application Thread] DEBUG Logger               - Closing Logger

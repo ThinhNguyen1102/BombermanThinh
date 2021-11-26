@@ -39,48 +39,82 @@ public class PlayerComponent extends Component {
 
     public PlayerComponent() {
         PhysicsWorld physics = getPhysicsWorld();
-        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.SPEED_ITEM) {
-            @Override
-            protected void onCollisionBegin(Entity player, Entity speedItem) {
-                speedItem.removeFromWorld();
-                inc("score", SCORE_ITEM);
-                inc("speed", SPEED);
+
+        onCollisionBegin(BombermanType.PLAYER, BombermanType.SPEED_ITEM, (p, speed_i) -> {
+            speed_i.removeFromWorld();
+            inc("score", SCORE_ITEM);
+            inc("speed", SPEED);
+            speed = geti("speed");
+
+            getGameTimer().runOnceAfter(() -> {
+                inc("speed", -SPEED);
                 speed = geti("speed");
+            }, Duration.seconds(8));
+        });
+//        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.SPEED_ITEM) {
+//            @Override
+//            protected void onCollisionBegin(Entity player, Entity speedItem) {
+//                speedItem.removeFromWorld();
+//                inc("score", SCORE_ITEM);
+//                inc("speed", SPEED);
+//                speed = geti("speed");
+//
+//                getGameTimer().runOnceAfter(() -> {
+//                    inc("speed", -SPEED);
+//                    speed = geti("speed");
+//                }, Duration.seconds(8));
+//            }
+//        });
 
-                getGameTimer().runOnceAfter(() -> {
-                    inc("speed", -SPEED);
-                    speed = geti("speed");
-                }, Duration.seconds(8));
-            }
+        onCollisionBegin(BombermanType.PLAYER, BombermanType.BOMB_ITEM, (p, bombs_t) -> {
+            bombs_t.removeFromWorld();
+            inc("score", SCORE_ITEM);
+            inc("bomb", 1);
         });
-        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.BOMB_ITEM) {
-            @Override
-            protected void onCollisionBegin(Entity player, Entity bombItem) {
-                bombItem.removeFromWorld();
-                inc("score", SCORE_ITEM);
-                inc("bomb", 1);
-            }
-        });
-        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.FLAME_ITEM) {
-            @Override
-            protected void onCollisionBegin(Entity player, Entity flameItem) {
-                flameItem.removeFromWorld();
-                inc("score", SCORE_ITEM);
-                inc("flame", 1);
-            }
+//        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.BOMB_ITEM) {
+//            @Override
+//            protected void onCollisionBegin(Entity player, Entity bombItem) {
+//                bombItem.removeFromWorld();
+//                inc("score", SCORE_ITEM);
+//                inc("bomb", 1);
+//            }
+//        });
+
+        onCollisionBegin(BombermanType.PLAYER, BombermanType.FLAME_ITEM, (p, flame_i) -> {
+            flame_i.removeFromWorld();
+            inc("score", SCORE_ITEM);
+            inc("flame", 1);
         });
 
-        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.FLAME_PASS_ITEM) {
-            @Override
-            protected void onCollisionBegin(Entity player, Entity flamePassItem) {
-                flamePassItem.removeFromWorld();
-                inc("score", SCORE_ITEM);
-                setAnimation(AnimationSkin.FLAME_PASS);
-                getGameTimer().runOnceAfter(() -> {
-                    setAnimation(AnimationSkin.NORMAL);
-                }, Duration.seconds(8));
-            }
+//        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.FLAME_ITEM) {
+//            @Override
+//            protected void onCollisionBegin(Entity player, Entity flameItem) {
+//                flameItem.removeFromWorld();
+//                inc("score", SCORE_ITEM);
+//                inc("flame", 1);
+//            }
+//        });
+
+        onCollisionBegin(BombermanType.PLAYER, BombermanType.FLAME_PASS_ITEM, (p, flame_pass_i) -> {
+            flame_pass_i.removeFromWorld();
+            inc("score", SCORE_ITEM);
+            setAnimation(AnimationSkin.FLAME_PASS);
+            getGameTimer().runOnceAfter(() -> {
+                setAnimation(AnimationSkin.NORMAL);
+            }, Duration.seconds(8));
         });
+
+//        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.FLAME_PASS_ITEM) {
+//            @Override
+//            protected void onCollisionBegin(Entity player, Entity flamePassItem) {
+//                flamePassItem.removeFromWorld();
+//                inc("score", SCORE_ITEM);
+//                setAnimation(AnimationSkin.FLAME_PASS);
+//                getGameTimer().runOnceAfter(() -> {
+//                    setAnimation(AnimationSkin.NORMAL);
+//                }, Duration.seconds(8));
+//            }
+//        });
 
         setAnimation(AnimationSkin.NORMAL);
 

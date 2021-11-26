@@ -14,13 +14,16 @@ import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyDef;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
+import com.almasb.fxgl.texture.AnimatedTexture;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 import static Bomber.Constants.GameConst.*;
+import static com.almasb.fxgl.dsl.FXGL.texture;
 
 public class BombermanFactory implements EntityFactory {
     @Spawns("background")
@@ -90,11 +93,12 @@ public class BombermanFactory implements EntityFactory {
 
     @Spawns("grass_break")
     public Entity newGrassBreak(SpawnData data) {
+        AnimatedTexture view = texture("grass_break_2.png").toAnimatedTexture(3, Duration.seconds(1));
         return FXGL.entityBuilder(data)
                 .type(BombermanType.GRASS_BREAK)
-                .with(new GrassBreakComponent())
                 .viewWithBBox(new Rectangle(SIZE - 3, SIZE - 3, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
+                .view(view.loop())
                 .zIndex(1)
                 .build();
     }
@@ -113,9 +117,10 @@ public class BombermanFactory implements EntityFactory {
 
     @Spawns("brick_break")
     public Entity newBrickBreak(SpawnData data) {
+        AnimatedTexture view = texture("brick_break.png").toAnimatedTexture(3, Duration.seconds(1));
         return FXGL.entityBuilder(data)
                 .type(BombermanType.BRICK_BREAK)
-                .with(new BrickBreakComponent())
+                .view(view.loop())
                 .viewWithBBox(new Rectangle(SIZE - 3, SIZE - 3, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
                 .zIndex(1)

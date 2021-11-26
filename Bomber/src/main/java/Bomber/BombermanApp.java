@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 
 import java.util.Map;
 
@@ -28,6 +29,12 @@ import static Bomber.Constants.GameConst.*;
 
 public class BombermanApp extends GameApplication {
     public static boolean sound_enabled = true;
+    private boolean requestNewGame = false;
+
+    public void onPlayerKilled() {
+        requestNewGame = true;
+    }
+
     @Override
     protected void initSettings(GameSettings gameSettings) {
         gameSettings.setHeight(VIEW_HEIGHT);
@@ -85,6 +92,16 @@ public class BombermanApp extends GameApplication {
         if (getd("levelTime") <= 0.0) {
             showMessage("you lose");
             set("levelTime", TIME_LEVEL);
+        }
+
+        if (requestNewGame) {
+            requestNewGame = false;
+            getPlayer().getComponent(PlayerComponent.class).die();
+            getGameTimer().runOnceAfter(() -> {
+                getGameScene().getViewport().flash(() -> {
+                    setLevel();
+                });
+            }, Duration.seconds(1));
         }
     }
 
@@ -197,13 +214,25 @@ public class BombermanApp extends GameApplication {
         PhysicsWorld physics = getPhysicsWorld();
         physics.setGravity(0, 0);
 
-        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.PORTAL) {
-            @Override
-            protected void onCollisionBegin(Entity player, Entity portal) {
-                nextLevel();
-                set("levelTime", TIME_LEVEL);
-            }
+        onCollisionBegin(BombermanType.PLAYER, BombermanType.PORTAL, (p, po) -> {
+            getGameTimer().runOnceAfter(() -> {
+                getGameScene().getViewport().flash(() -> {
+                    nextLevel();
+                });
+            }, Duration.seconds(1));
+            set("levelTime", TIME_LEVEL);
         });
+
+        onCollisionBegin(BombermanType.PLAYER, BombermanType.FIRE, (p, f) -> {
+            requestNewGame = true;
+        });
+//        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.PORTAL) {
+//            @Override
+//            protected void onCollisionBegin(Entity player, Entity portal) {
+//                nextLevel();
+//                set("levelTime", TIME_LEVEL);
+//            }
+//        });
     }
 
     private void nextLevel() {
@@ -223,7 +252,6 @@ public class BombermanApp extends GameApplication {
         viewport.bindToEntity(getPlayer(), getAppWidth() / 2, getAppHeight() / 2);
         viewport.setLazy(true);
     }
-
 
     public static void main(String[] args) {
         launch(args);
