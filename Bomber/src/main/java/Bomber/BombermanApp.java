@@ -211,7 +211,7 @@ public class BombermanApp extends GameApplication {
 
         onCollisionBegin(BombermanType.PLAYER, BombermanType.PORTAL, (p, po) -> {
             getGameTimer().runOnceAfter(() -> {
-                getGameScene().getViewport().flash(() -> {
+                getGameScene().getViewport().fade(() -> {
                     nextLevel();
                 });
             }, Duration.seconds(1));
