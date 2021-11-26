@@ -31,10 +31,6 @@ public class BombermanApp extends GameApplication {
     public static boolean sound_enabled = true;
     private boolean requestNewGame = false;
 
-    public void onPlayerKilled() {
-        requestNewGame = true;
-    }
-
     @Override
     protected void initSettings(GameSettings gameSettings) {
         gameSettings.setHeight(VIEW_HEIGHT);
@@ -90,8 +86,9 @@ public class BombermanApp extends GameApplication {
         inc("levelTime", -tpf);
 
         if (getd("levelTime") <= 0.0) {
-            showMessage("you lose");
-            set("levelTime", TIME_LEVEL);
+//            showMessage("you lose");
+//            set("levelTime", TIME_LEVEL);
+            getDialogService().showMessageBox("Game Over!!!", getGameController()::startNewGame);
         }
 
         if (requestNewGame) {
@@ -224,7 +221,7 @@ public class BombermanApp extends GameApplication {
         });
 
         onCollisionBegin(BombermanType.PLAYER, BombermanType.FIRE, (p, f) -> {
-            requestNewGame = true;
+            onPlayerKilled();
         });
 //        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.PORTAL) {
 //            @Override
@@ -233,6 +230,14 @@ public class BombermanApp extends GameApplication {
 //                set("levelTime", TIME_LEVEL);
 //            }
 //        });
+    }
+
+    private void gameOver() {
+        getDialogService().showMessageBox("Demo Over. Press OK to exit", getGameController()::exit);
+    }
+
+    private void onPlayerKilled() {
+        requestNewGame = true;
     }
 
     private void nextLevel() {
