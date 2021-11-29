@@ -118,7 +118,7 @@ public class BombermanFactory implements EntityFactory {
         AnimatedTexture view = texture("grass_break_2.png").toAnimatedTexture(3, Duration.seconds(1));
         return FXGL.entityBuilder(data)
                 .type(BombermanType.GRASS_BREAK)
-                .viewWithBBox(new Rectangle(SIZE - 3, SIZE - 3, Color.TRANSPARENT))
+                .viewWithBBox(new Rectangle(SIZE_BLOCK / 2 - 3, SIZE_BLOCK / 2 - 3, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
                 .view(view.loop())
                 .zIndex(1)
@@ -143,7 +143,7 @@ public class BombermanFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(BombermanType.BRICK_BREAK)
                 .view(view.loop())
-                .viewWithBBox(new Rectangle(SIZE - 3, SIZE - 3, Color.TRANSPARENT))
+                .viewWithBBox(new Rectangle(SIZE_BLOCK / 2 - 3, SIZE_BLOCK / 2 - 3, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
                 .zIndex(1)
                 .build();
@@ -163,7 +163,7 @@ public class BombermanFactory implements EntityFactory {
                 .type(BombermanType.FIRE)
                 .with(new FlameComponent())
                 // cần đổi
-                .viewWithBBox(new Rectangle(SIZE - 3, SIZE - 3, Color.TRANSPARENT))
+                .viewWithBBox(new Rectangle(SIZE_BLOCK / 2 - 3, SIZE_BLOCK / 2 - 3, Color.TRANSPARENT))
                 .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
                 .with(new CollidableComponent(true))
                 .zIndex(1)

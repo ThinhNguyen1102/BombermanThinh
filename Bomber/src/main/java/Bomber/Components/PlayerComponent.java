@@ -17,7 +17,7 @@ import static Bomber.Constants.GameConst.*;
 
 public class PlayerComponent extends Component {
     private static final double ANIM_TIME_PLAYER = 0.5;
-    private static final int SIZE_P = 45;
+    private static final int SIZE_FRAMES = 45;
     private int bombsPlaced = 0;
     private boolean exploreCancel = false;
 
@@ -82,46 +82,46 @@ public class PlayerComponent extends Component {
 
     public void setAnimation(AnimationSkin animation) {
         if (animation == AnimationSkin.NORMAL) {
-            animDie = new AnimationChannel(image("player_die.png"), 3, SIZE_P, SIZE_P,
+            animDie = new AnimationChannel(image("player_die.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(1.5), 0, 2);
 
-            animIdleDown = new AnimationChannel(image("player_down.png"), 3, SIZE_P, SIZE_P,
+            animIdleDown = new AnimationChannel(image("player_down.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleRight = new AnimationChannel(image("player_right.png"), 3, SIZE_P, SIZE_P,
+            animIdleRight = new AnimationChannel(image("player_right.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleUp = new AnimationChannel(image("player_up.png"), 3, SIZE_P, SIZE_P,
+            animIdleUp = new AnimationChannel(image("player_up.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleLeft = new AnimationChannel(image("player_left.png"), 3, SIZE_P, SIZE_P,
+            animIdleLeft = new AnimationChannel(image("player_left.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
 
-            animWalkDown = new AnimationChannel(image("player_down.png"), 3, SIZE_P, SIZE_P,
+            animWalkDown = new AnimationChannel(image("player_down.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkRight = new AnimationChannel(image("player_right.png"), 3, SIZE_P, SIZE_P,
+            animWalkRight = new AnimationChannel(image("player_right.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkUp = new AnimationChannel(image("player_up.png"), 3, SIZE_P, SIZE_P,
+            animWalkUp = new AnimationChannel(image("player_up.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkLeft = new AnimationChannel(image("player_left.png"), 3, SIZE_P, SIZE_P,
+            animWalkLeft = new AnimationChannel(image("player_left.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
         } else {
-            animDie = new AnimationChannel(image("player_die.png"), 3, SIZE_P, SIZE_P,
+            animDie = new AnimationChannel(image("player_die.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(1.5), 0, 2);
 
-            animIdleDown = new AnimationChannel(image("player_down_1.png"), 3, SIZE_P, SIZE_P,
+            animIdleDown = new AnimationChannel(image("player_down_1.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleRight = new AnimationChannel(image("player_right_1.png"), 3, SIZE_P, SIZE_P,
+            animIdleRight = new AnimationChannel(image("player_right_1.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleUp = new AnimationChannel(image("player_up_1.png"), 3, SIZE_P, SIZE_P,
+            animIdleUp = new AnimationChannel(image("player_up_1.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
-            animIdleLeft = new AnimationChannel(image("player_left_1.png"), 3, SIZE_P, SIZE_P,
+            animIdleLeft = new AnimationChannel(image("player_left_1.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 0);
 
-            animWalkDown = new AnimationChannel(image("player_down_1.png"), 3, SIZE_P, SIZE_P,
+            animWalkDown = new AnimationChannel(image("player_down_1.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkRight = new AnimationChannel(image("player_right_1.png"), 3, SIZE_P, SIZE_P,
+            animWalkRight = new AnimationChannel(image("player_right_1.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkUp = new AnimationChannel(image("player_up_1.png"), 3, SIZE_P, SIZE_P,
+            animWalkUp = new AnimationChannel(image("player_up_1.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
-            animWalkLeft = new AnimationChannel(image("player_left_1.png"), 3, SIZE_P, SIZE_P,
+            animWalkLeft = new AnimationChannel(image("player_left_1.png"), 3, SIZE_FRAMES, SIZE_FRAMES,
                     Duration.seconds(ANIM_TIME_PLAYER), 0, 2);
         }
     }
@@ -222,14 +222,14 @@ public class PlayerComponent extends Component {
         }
         bombsPlaced++;
         // fix
-        int bombLocationX = (int) (entity.getX() % SIZE > 24
-                ? entity.getX() + SIZE - entity.getX() % SIZE + 1
-                : entity.getX() - entity.getX() % SIZE + 1);
-        int bombLocationY = (int) (entity.getY() % SIZE > 24
-                ? entity.getY() + SIZE - entity.getY() % SIZE + 1
-                : entity.getY() - entity.getY() % SIZE + 1);
+        int bombX = (int) (entity.getX() % SIZE_BLOCK > SIZE_BLOCK / 2
+                ? entity.getX() + SIZE_BLOCK - entity.getX() % SIZE_BLOCK + 1
+                : entity.getX() - entity.getX() % SIZE_BLOCK + 1);
+        int bombY = (int) (entity.getY() % SIZE_BLOCK > SIZE_BLOCK / 2
+                ? entity.getY() + SIZE_BLOCK - entity.getY() % SIZE_BLOCK + 1
+                : entity.getY() - entity.getY() % SIZE_BLOCK + 1);
 
-        Entity bomb = spawn("bomb", new SpawnData(bombLocationX, bombLocationY));
+        Entity bomb = spawn("bomb", new SpawnData(bombX, bombY));
 
         if (currMove != MoveDirection.DIE) {
             getGameTimer().runOnceAfter(() -> {

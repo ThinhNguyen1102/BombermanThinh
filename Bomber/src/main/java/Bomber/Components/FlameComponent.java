@@ -4,7 +4,6 @@ import Bomber.BombermanType;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
-import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.PhysicsWorld;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
@@ -49,7 +48,7 @@ public class FlameComponent extends Component {
             getGameTimer().runOnceAfter(b::removeFromWorld, Duration.seconds(1));
         });
 
-        animationFlame = new AnimationChannel(image("bomb_exploded_1.png"), 3, SIZE, SIZE,
+        animationFlame = new AnimationChannel(image("bomb_exploded_1.png"), 3, SIZE_BLOCK, SIZE_BLOCK,
                 Duration.seconds(0.4), 0, 2);
 
         texture = new AnimatedTexture(animationFlame);

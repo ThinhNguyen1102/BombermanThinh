@@ -21,7 +21,7 @@ public class BombComponent extends Component {
     private AnimationChannel animation;
 
     public BombComponent() {
-        animation = new AnimationChannel(image("bomb_ani.png"), 3, SIZE, SIZE,
+        animation = new AnimationChannel(image("bomb_ani.png"), 3, SIZE_BLOCK, SIZE_BLOCK,
                 Duration.seconds(0.5), 0, 2);
         texture = new AnimatedTexture(animation);
         texture.loop();
@@ -34,10 +34,10 @@ public class BombComponent extends Component {
 
     public void explode() {
         for (int i = 1; i <= 1; i++) {
-            listFire.add(spawn("fire", new SpawnData(entity.getX() + SIZE * i, entity.getY())));
-            listFire.add(spawn("fire", new SpawnData(entity.getX() - SIZE * i, entity.getY())));
-            listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY() + SIZE * i)));
-            listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY() - SIZE * i)));
+            listFire.add(spawn("fire", new SpawnData(entity.getX() + SIZE_BLOCK * i, entity.getY())));
+            listFire.add(spawn("fire", new SpawnData(entity.getX() - SIZE_BLOCK * i, entity.getY())));
+            listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY() + SIZE_BLOCK * i)));
+            listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY() - SIZE_BLOCK * i)));
         }
         listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY())));
 

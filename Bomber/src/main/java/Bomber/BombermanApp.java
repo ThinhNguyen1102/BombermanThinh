@@ -80,7 +80,7 @@ public class BombermanApp extends GameApplication {
         vars.put("flame", 1);
         vars.put("score", 0);
         vars.put("speed", SPEED);
-        vars.put("time", TIME_PER_SECONDS);
+        vars.put("time", TIME_PER_LEVEL);
         vars.put("level", START_LEVEL);
     }
 
@@ -254,7 +254,7 @@ public class BombermanApp extends GameApplication {
         viewport.setBounds(0, 0, GAME_WORLD_WIDTH, GAME_WORLD_HEIGHT);
         viewport.bindToEntity(getPlayer(), getAppWidth() / 2, getAppHeight() / 2);
         viewport.setLazy(true);
-        set("time", TIME_PER_SECONDS);
+        set("time", TIME_PER_LEVEL);
     }
 
     public static void main(String[] args) {

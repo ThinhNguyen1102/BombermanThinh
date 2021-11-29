@@ -47,7 +47,6 @@
   <object id="4" type="wall" x="48" y="96" width="1392" height="48"/>
   <object id="5" type="wall" x="48" y="672" width="1392" height="48"/>
   <object id="6" type="player" x="48" y="144" width="48" height="48"/>
-  <object id="295" type="player" x="48" y="144" width="48" height="48"/>
   <object id="77" type="grass" x="48" y="624" width="48" height="48"/>
   <object id="83" type="grass" x="480" y="144" width="48" height="48"/>
   <object id="86" type="grass" x="672" y="240" width="48" height="48"/>

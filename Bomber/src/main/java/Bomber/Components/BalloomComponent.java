@@ -13,7 +13,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class BalloomComponent extends Component {
     private static final double ANIM_TIME_BALLOOM = 0.5;
-    private static final int SIZE_B = 45;
+    private static final int SIZE_FLAME = 45;
     private double speed = 100.0;
 
     private double dx = speed;
@@ -41,13 +41,13 @@ public class BalloomComponent extends Component {
             b.getComponent(BalloomComponent.class).turn();
         });
 
-        animDie = new AnimationChannel(image("balloom.png"), 7, SIZE_B, SIZE_B,
+        animDie = new AnimationChannel(image("balloom.png"), 7, SIZE_FLAME, SIZE_FLAME,
                 Duration.seconds(ANIM_TIME_BALLOOM), 0, 0);
-        animWalkRight = new AnimationChannel(image("balloom.png"), 7, SIZE_B, SIZE_B,
+        animWalkRight = new AnimationChannel(image("balloom.png"), 7, SIZE_FLAME, SIZE_FLAME,
                 Duration.seconds(ANIM_TIME_BALLOOM), 4, 6);
-        animWalkLeft = new AnimationChannel(image("balloom.png"), 7, SIZE_B, SIZE_B,
+        animWalkLeft = new AnimationChannel(image("balloom.png"), 7, SIZE_FLAME, SIZE_FLAME,
                 Duration.seconds(ANIM_TIME_BALLOOM), 1, 3);
-        animStop = new AnimationChannel(image("balloom.png"), 7, SIZE_B, SIZE_B,
+        animStop = new AnimationChannel(image("balloom.png"), 7, SIZE_FLAME, SIZE_FLAME,
                 Duration.seconds(1), 1, 6);
 
         texture = new AnimatedTexture(animWalkRight);
