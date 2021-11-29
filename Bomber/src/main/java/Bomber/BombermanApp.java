@@ -21,6 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -100,6 +101,7 @@ public class BombermanApp extends GameApplication {
         if (requestNewGame) {
             requestNewGame = false;
             getPlayer().getComponent(PlayerComponent.class).die();
+            getPlayer().getComponent(PlayerComponent.class).setExploreCancel(true);
             getGameTimer().runOnceAfter(() -> {
                 getGameScene().getViewport().fade(() -> {
                     set("bomb", 1);
@@ -107,16 +109,16 @@ public class BombermanApp extends GameApplication {
                 });
             }, Duration.seconds(0.5));
         }
+
+//        timeWall_E = timeWall_E + tpf;
+//        if (timeWall_E > 20) {
+//
+//            timeWall_E = 0;
+//        }
     }
 
     @Override
     protected void initUI() {
-//        Label score = setTextUI("score", "Score: %d", ValType.INT);
-//        Label speed = setTextUI("score", "Score: %d", ValType.INT);
-//        Label flame = setTextUI("score", "Score: %d", ValType.INT);
-//        Label bomb = setTextUI("score", "Score: %d", ValType.INT);
-//        Label levelTime = setTextUI("score", "Score: %d", ValType.INT);
-//
 //        HBox box = new HBox();
 //        box.setAlignment(Pos.CENTER);
 //        box.getChildren().addAll(score, speed, flame, bomb, levelTime);
@@ -215,9 +217,7 @@ public class BombermanApp extends GameApplication {
 
         onCollisionBegin(BombermanType.PLAYER, BombermanType.PORTAL, (p, po) -> {
             getGameTimer().runOnceAfter(() -> {
-                getGameScene().getViewport().fade(() -> {
-                    nextLevel();
-                });
+                getGameScene().getViewport().fade(this::nextLevel);
             }, Duration.seconds(1));
         });
 
@@ -226,18 +226,8 @@ public class BombermanApp extends GameApplication {
         });
 
         onCollisionBegin(BombermanType.PLAYER, BombermanType.BALLOOM_E, (p, b) -> {
-            getGameTimer().runOnceAfter(()-> {
-                b.getComponent(BalloomComponent.class).BalloomStop();
-            }, Duration.seconds(1));
             onPlayerKilled();
         });
-//        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.PORTAL) {
-//            @Override
-//            protected void onCollisionBegin(Entity player, Entity portal) {
-//                nextLevel();
-//                set("levelTime", TIME_LEVEL);
-//            }
-//        });
     }
 
     private void gameOver() {

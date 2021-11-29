@@ -11,7 +11,6 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 import static com.almasb.fxgl.dsl.FXGL.spawn;
-import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameTimer;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.image;
 import static Bomber.Constants.GameConst.*;
 

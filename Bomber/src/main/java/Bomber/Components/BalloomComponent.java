@@ -19,8 +19,11 @@ public class BalloomComponent extends Component {
     private double dx = speed;
     private double dy = 0;
 
+    public enum TurnDirection {
+        BLOCK_LEFT, BLOCK_RIGHT, BLOCK_UP, BLOCK_DOWN
+    }
 
-    private enum MoveDirection {
+    public enum MoveDirection {
         RIGHT, LEFT, DIE, STOP
     }
 
@@ -81,41 +84,44 @@ public class BalloomComponent extends Component {
 
     public void turn() {
         if (dx < 0.0) {
-            entity.translateX(2);
-            dx = 0.0;
-            dy = getRandomSpeed();
-            if (dy > 0.0) {
-                currMove = MoveDirection.RIGHT;
-            } else {
-                currMove = MoveDirection.LEFT;
-            }
+            setTurnBalloom(TurnDirection.BLOCK_LEFT);
         } else if (dx > 0.0) {
-            entity.translateX(-2);
-            dx = 0.0;
-            dy = getRandomSpeed();
-            if (dy < 0.0) {
-                currMove = MoveDirection.RIGHT;
-            } else {
-                currMove = MoveDirection.LEFT;
-            }
+            setTurnBalloom(TurnDirection.BLOCK_RIGHT);
         } else if (dy < 0.0) {
-            entity.translateY(2);
-            dy = 0.0;
-            dx = getRandomSpeed();
-            if (dx > 0.0) {
-                currMove = MoveDirection.RIGHT;
-            } else {
-                currMove = MoveDirection.LEFT;
-            }
+            setTurnBalloom(TurnDirection.BLOCK_UP);
         } else if (dy > 0.0) {
-            entity.translateY(-2);
-            dy = 0.0;
-            dx = getRandomSpeed();
-            if (dx > 0.0) {
-                currMove = MoveDirection.RIGHT;
-            } else {
-                currMove = MoveDirection.LEFT;
-            }
+            setTurnBalloom(TurnDirection.BLOCK_DOWN);
+        }
+    }
+
+    private void setTurnBalloom(TurnDirection direc) {
+        switch (direc) {
+            case BLOCK_LEFT:
+                entity.translateX(2);
+                dx = 0.0;
+                dy = getRandomSpeed();
+                break;
+            case BLOCK_RIGHT:
+                entity.translateX(-2);
+                dx = 0.0;
+                dy = getRandomSpeed();
+                break;
+            case BLOCK_UP:
+                entity.translateY(2);
+                dy = 0.0;
+                dx = getRandomSpeed();
+                break;
+            case BLOCK_DOWN:
+                entity.translateY(-2);
+                dy = 0.0;
+                dx = getRandomSpeed();
+                break;
+        }
+
+        if (dx > 0.0 || dy > 0.0) {
+            currMove = MoveDirection.RIGHT;
+        } else {
+            currMove = MoveDirection.LEFT;
         }
     }
 

@@ -25,29 +25,12 @@ public class FlameComponent extends Component {
             f.removeFromWorld();
         });
 
-//        physics.addCollisionHandler(new CollisionHandler(BombermanType.FIRE, BombermanType.WALL) {
-//            @Override
-//            protected void onCollisionBegin(Entity fire, Entity wall) {
-//                fire.removeFromWorld();
-//            }
-//        });
-
         onCollisionBegin(BombermanType.FIRE, BombermanType.BRICK, (f, b) -> {
             Entity bBreak = spawn("brick_break", new SpawnData(b.getX(), b.getY()));
             b.removeFromWorld();
             getGameTimer().runOnceAfter(bBreak::removeFromWorld, Duration.seconds(1));
             inc("score", SCORE_BRICK);
         });
-
-//        physics.addCollisionHandler(new CollisionHandler(BombermanType.FIRE, BombermanType.BRICK) {
-//            @Override
-//            protected void onCollisionBegin(Entity fire, Entity brick) {
-//                Entity bBreak = spawn("brick_break", new SpawnData(brick.getX(), brick.getY()));
-//                brick.removeFromWorld();
-//                getGameTimer().runOnceAfter(bBreak::removeFromWorld, Duration.seconds(1));
-//                inc("score", SCORE_BRICK);
-//            }
-//        });
 
         onCollisionBegin(BombermanType.FIRE, BombermanType.GRASS, (f, g) -> {
             Entity gBreak = spawn("grass_break", new SpawnData(g.getX(), g.getY()));
@@ -56,28 +39,10 @@ public class FlameComponent extends Component {
             inc("score", SCORE_BRICK);
         });
 
-//        physics.addCollisionHandler(new CollisionHandler(BombermanType.FIRE, BombermanType.GRASS) {
-//            @Override
-//            protected void onCollisionBegin(Entity fire, Entity grass) {
-//                Entity gBreak = spawn("grass_break", new SpawnData(grass.getX(), grass.getY()));
-//                grass.removeFromWorld();
-//                getGameTimer().runOnceAfter(gBreak::removeFromWorld, Duration.seconds(1));
-//                inc("score", SCORE_BRICK);
-//            }
-//        });
-
         onCollisionBegin(BombermanType.FIRE, BombermanType.CORAL, (f, c) -> {
             c.removeFromWorld();
             inc("score", SCORE_BRICK);
         });
-
-//        physics.addCollisionHandler(new CollisionHandler(BombermanType.FIRE, BombermanType.CORAL) {
-//            @Override
-//            protected void onCollisionBegin(Entity fire, Entity coral) {
-//                coral.removeFromWorld();
-//                inc("score", SCORE_BRICK);
-//            }
-//        });
 
         onCollisionBegin(BombermanType.FIRE, BombermanType.BALLOOM_E, (f, b) -> {
             b.getComponent(BalloomComponent.class).BalloomDie();

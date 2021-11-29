@@ -19,6 +19,8 @@ public class PlayerComponent extends Component {
     private static final double ANIM_TIME_PLAYER = 0.5;
     private static final int SIZE_P = 45;
     private int bombsPlaced = 0;
+    private boolean exploreCancel = false;
+
     public enum MoveDirection {
         UP, RIGHT, DOWN, LEFT, STOP,DIE
     }
@@ -51,49 +53,18 @@ public class PlayerComponent extends Component {
                 speed = geti("speed");
             }, Duration.seconds(8));
         });
-//        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.SPEED_ITEM) {
-//            @Override
-//            protected void onCollisionBegin(Entity player, Entity speedItem) {
-//                speedItem.removeFromWorld();
-//                inc("score", SCORE_ITEM);
-//                inc("speed", SPEED);
-//                speed = geti("speed");
-//
-//                getGameTimer().runOnceAfter(() -> {
-//                    inc("speed", -SPEED);
-//                    speed = geti("speed");
-//                }, Duration.seconds(8));
-//            }
-//        });
 
         onCollisionBegin(BombermanType.PLAYER, BombermanType.BOMB_ITEM, (p, bombs_t) -> {
             bombs_t.removeFromWorld();
             inc("score", SCORE_ITEM);
             inc("bomb", 1);
         });
-//        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.BOMB_ITEM) {
-//            @Override
-//            protected void onCollisionBegin(Entity player, Entity bombItem) {
-//                bombItem.removeFromWorld();
-//                inc("score", SCORE_ITEM);
-//                inc("bomb", 1);
-//            }
-//        });
 
         onCollisionBegin(BombermanType.PLAYER, BombermanType.FLAME_ITEM, (p, flame_i) -> {
             flame_i.removeFromWorld();
             inc("score", SCORE_ITEM);
             inc("flame", 1);
         });
-
-//        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.FLAME_ITEM) {
-//            @Override
-//            protected void onCollisionBegin(Entity player, Entity flameItem) {
-//                flameItem.removeFromWorld();
-//                inc("score", SCORE_ITEM);
-//                inc("flame", 1);
-//            }
-//        });
 
         onCollisionBegin(BombermanType.PLAYER, BombermanType.FLAME_PASS_ITEM, (p, flame_pass_i) -> {
             flame_pass_i.removeFromWorld();
@@ -104,22 +75,9 @@ public class PlayerComponent extends Component {
             }, Duration.seconds(8));
         });
 
-//        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.FLAME_PASS_ITEM) {
-//            @Override
-//            protected void onCollisionBegin(Entity player, Entity flamePassItem) {
-//                flamePassItem.removeFromWorld();
-//                inc("score", SCORE_ITEM);
-//                setAnimation(AnimationSkin.FLAME_PASS);
-//                getGameTimer().runOnceAfter(() -> {
-//                    setAnimation(AnimationSkin.NORMAL);
-//                }, Duration.seconds(8));
-//            }
-//        });
-
         setAnimation(AnimationSkin.NORMAL);
 
         texture = new AnimatedTexture(animIdleDown);
-//        getEntity().setScaleUniform(0.9);
     }
 
     public void setAnimation(AnimationSkin animation) {
@@ -259,12 +217,11 @@ public class PlayerComponent extends Component {
     }
 
     public void placeBomb() {
-//        System.out.println(entity.getX() + "-" + entity.getY());
         if (bombsPlaced == geti("bomb")) {
             return;
         }
         bombsPlaced++;
-        // cần sửa
+        // fix
         int bombLocationX = (int) (entity.getX() % SIZE > 24
                 ? entity.getX() + SIZE - entity.getX() % SIZE + 1
                 : entity.getX() - entity.getX() % SIZE + 1);
@@ -274,10 +231,23 @@ public class PlayerComponent extends Component {
 
         Entity bomb = spawn("bomb", new SpawnData(bombLocationX, bombLocationY));
 
-        getGameTimer().runOnceAfter(() -> {
-            bomb.getComponent(BombComponent.class).explode();
-            bombsPlaced--;
-        }, Duration.seconds(2.5));
+        if (currMove != MoveDirection.DIE) {
+            getGameTimer().runOnceAfter(() -> {
+                if (!exploreCancel) {
+                    bomb.getComponent(BombComponent.class).explode();
+                } else {
+                    bomb.removeFromWorld();
+                }
+                bombsPlaced--;
+            }, Duration.seconds(2.5));
+        }
+    }
 
+    public boolean isExploreCancel() {
+        return exploreCancel;
+    }
+
+    public void setExploreCancel(boolean exploreCancel) {
+        this.exploreCancel = exploreCancel;
     }
 }
