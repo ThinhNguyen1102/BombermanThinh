@@ -1,5 +1,6 @@
 package Bomber;
 
+import Bomber.Components.BalloomComponent;
 import Bomber.Components.PlayerComponent;
 import Bomber.menu.BombermanGameMenu;
 import Bomber.menu.BombermanMenu;
@@ -68,6 +69,8 @@ public class BombermanApp extends GameApplication {
                 onPlayerKilled();
             }
         });
+
+//        System.out.println(getPlayer().getX() + "-" + getPlayer().getY());
     }
 
     @Override
@@ -99,6 +102,7 @@ public class BombermanApp extends GameApplication {
             getPlayer().getComponent(PlayerComponent.class).die();
             getGameTimer().runOnceAfter(() -> {
                 getGameScene().getViewport().fade(() -> {
+                    set("bomb", 1);
                     setLevel();
                 });
             }, Duration.seconds(0.5));
@@ -218,6 +222,13 @@ public class BombermanApp extends GameApplication {
         });
 
         onCollisionBegin(BombermanType.PLAYER, BombermanType.FIRE, (p, f) -> {
+            onPlayerKilled();
+        });
+
+        onCollisionBegin(BombermanType.PLAYER, BombermanType.BALLOOM_E, (p, b) -> {
+            getGameTimer().runOnceAfter(()-> {
+                b.getComponent(BalloomComponent.class).BalloomStop();
+            }, Duration.seconds(1));
             onPlayerKilled();
         });
 //        physics.addCollisionHandler(new CollisionHandler(BombermanType.PLAYER, BombermanType.PORTAL) {

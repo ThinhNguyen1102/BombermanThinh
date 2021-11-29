@@ -6,7 +6,6 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
-import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.PhysicsWorld;
 import com.almasb.fxgl.texture.AnimatedTexture;
@@ -39,15 +38,16 @@ public class PlayerComponent extends Component {
 
     public PlayerComponent() {
         PhysicsWorld physics = getPhysicsWorld();
+        physics.setGravity(0, 0);
 
         onCollisionBegin(BombermanType.PLAYER, BombermanType.SPEED_ITEM, (p, speed_i) -> {
             speed_i.removeFromWorld();
             inc("score", SCORE_ITEM);
-            inc("speed", SPEED);
+            inc("speed", SPEED / 3);
             speed = geti("speed");
 
             getGameTimer().runOnceAfter(() -> {
-                inc("speed", -SPEED);
+                inc("speed", -SPEED / 3);
                 speed = geti("speed");
             }, Duration.seconds(8));
         });
@@ -259,6 +259,7 @@ public class PlayerComponent extends Component {
     }
 
     public void placeBomb() {
+//        System.out.println(entity.getX() + "-" + entity.getY());
         if (bombsPlaced == geti("bomb")) {
             return;
         }

@@ -56,6 +56,28 @@ public class BombermanFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("balloom_e")
+    public Entity newBalloom(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .type(BombermanType.BALLOOM_E)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"),
+                        data.<Integer>get("height"))))
+                .with(new BalloomComponent())
+                .with(new CollidableComponent(true))
+                .zIndex(2)
+                .build();
+    }
+
+//    @Spawns("wall_e")
+//    public Entity newWallE(SpawnData data) {
+//        return FXGL.entityBuilder(data)
+//                .type(BombermanType.WALL_E)
+//                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"),
+//                        data.<Integer>get("height"))))
+//                .with(new CollidableComponent(true))
+//                .build();
+//    }
+
     @Spawns("wall")
     public Entity newWall(SpawnData data) {
         return FXGL.entityBuilder(data)

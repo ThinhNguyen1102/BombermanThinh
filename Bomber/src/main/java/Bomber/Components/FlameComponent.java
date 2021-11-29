@@ -79,6 +79,11 @@ public class FlameComponent extends Component {
 //            }
 //        });
 
+        onCollisionBegin(BombermanType.FIRE, BombermanType.BALLOOM_E, (f, b) -> {
+            b.getComponent(BalloomComponent.class).BalloomDie();
+            getGameTimer().runOnceAfter(b::removeFromWorld, Duration.seconds(1));
+        });
+
         animationFlame = new AnimationChannel(image("bomb_exploded_1.png"), 3, SIZE, SIZE,
                 Duration.seconds(0.4), 0, 2);
 
