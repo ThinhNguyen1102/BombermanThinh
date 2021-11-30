@@ -21,7 +21,7 @@ public class PlayerComponent extends Component {
     private int bombsPlaced = 0;
     private boolean exploreCancel = false;
 
-    public enum MoveDirection {
+    public enum StatusDirection {
         UP, RIGHT, DOWN, LEFT, STOP,DIE
     }
 
@@ -29,7 +29,7 @@ public class PlayerComponent extends Component {
         NORMAL, FLAME_PASS
     }
 
-    private MoveDirection currMove = MoveDirection.STOP;
+    private StatusDirection currMove = StatusDirection.STOP;
     private PhysicsComponent physics;
     private int speed = FXGL.geti("speed");
 
@@ -179,41 +179,41 @@ public class PlayerComponent extends Component {
     }
 
     public void up() {
-        if(currMove != MoveDirection.DIE) {
-            currMove = MoveDirection.UP;
+        if(currMove != StatusDirection.DIE) {
+            currMove = StatusDirection.UP;
             physics.setVelocityY(-speed);
         }
     }
 
     public void down() {
-        if(currMove != MoveDirection.DIE) {
-            currMove = MoveDirection.DOWN;
+        if(currMove != StatusDirection.DIE) {
+            currMove = StatusDirection.DOWN;
             physics.setVelocityY(speed);
         }
     }
 
     public void left() {
-        if(currMove != MoveDirection.DIE) {
-            currMove = MoveDirection.LEFT;
+        if(currMove != StatusDirection.DIE) {
+            currMove = StatusDirection.LEFT;
             physics.setVelocityX(-speed);
         }
     }
 
     public void right() {
-        if(currMove != MoveDirection.DIE) {
-            currMove = MoveDirection.RIGHT;
+        if(currMove != StatusDirection.DIE) {
+            currMove = StatusDirection.RIGHT;
             physics.setVelocityX(speed);
         }
     }
 
     public void stop() {
-        if(currMove != MoveDirection.DIE) {
-            currMove = MoveDirection.STOP;
+        if(currMove != StatusDirection.DIE) {
+            currMove = StatusDirection.STOP;
         }
     }
 
     public void die() {
-        currMove = MoveDirection.DIE;
+        currMove = StatusDirection.DIE;
     }
 
     public void placeBomb() {
@@ -231,7 +231,7 @@ public class PlayerComponent extends Component {
 
         Entity bomb = spawn("bomb", new SpawnData(bombX, bombY));
 
-        if (currMove != MoveDirection.DIE) {
+        if (currMove != StatusDirection.DIE) {
             getGameTimer().runOnceAfter(() -> {
                 if (!exploreCancel) {
                     bomb.getComponent(BombComponent.class).explode();

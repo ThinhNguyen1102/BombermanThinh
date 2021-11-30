@@ -41,6 +41,10 @@ public class BalloomComponent extends Component {
             b.getComponent(BalloomComponent.class).turn();
         });
 
+        onCollisionBegin(BombermanType.BALLOOM_E, BombermanType.WALL_E, (b, w) -> {
+            b.getComponent(BalloomComponent.class).turn();
+        });
+
         animDie = new AnimationChannel(image("balloom.png"), 7, SIZE_FLAME, SIZE_FLAME,
                 Duration.seconds(ANIM_TIME_BALLOOM), 0, 0);
         animWalkRight = new AnimationChannel(image("balloom.png"), 7, SIZE_FLAME, SIZE_FLAME,

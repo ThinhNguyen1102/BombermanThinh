@@ -50,7 +50,7 @@ public class BombermanFactory implements EntityFactory {
                 .viewWithBBox(new Circle(24, 24, 22, Color.WHITE))
                 .with(physics)
                 .with(new PlayerComponent())
-                .with(new PhysicsComponent())
+//                .with(new PhysicsComponent())
                 .with(new CollidableComponent(true))
                 .zIndex(5)
                 .build();
@@ -68,15 +68,16 @@ public class BombermanFactory implements EntityFactory {
                 .build();
     }
 
-//    @Spawns("wall_e")
-//    public Entity newWallE(SpawnData data) {
-//        return FXGL.entityBuilder(data)
-//                .type(BombermanType.WALL_E)
-//                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"),
-//                        data.<Integer>get("height"))))
-//                .with(new CollidableComponent(true))
-//                .build();
-//    }
+    @Spawns("wall_e")
+    public Entity newWallE(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .type(BombermanType.WALL_E)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"),
+                        data.<Integer>get("height"))))
+                .viewWithBBox("coral.png")
+                .with(new CollidableComponent(true))
+                .build();
+    }
 
     @Spawns("wall")
     public Entity newWall(SpawnData data) {

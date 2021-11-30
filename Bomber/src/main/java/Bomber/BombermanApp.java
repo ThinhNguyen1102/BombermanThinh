@@ -1,6 +1,6 @@
 package Bomber;
 
-import Bomber.Components.BalloomComponent;
+
 import Bomber.Components.PlayerComponent;
 import Bomber.menu.BombermanGameMenu;
 import Bomber.menu.BombermanMenu;
@@ -91,6 +91,8 @@ public class BombermanApp extends GameApplication {
         loopBGM("title_screen.mp3");
     }
 
+    private double timeChangeWallE = 0;
+
     @Override
     protected void onUpdate(double tpf) {
 
@@ -110,11 +112,20 @@ public class BombermanApp extends GameApplication {
             }, Duration.seconds(0.5));
         }
 
-//        timeWall_E = timeWall_E + tpf;
-//        if (timeWall_E > 20) {
-//
-//            timeWall_E = 0;
-//        }
+        timeChangeWallE = timeChangeWallE + tpf;
+        if (timeChangeWallE > 10) {
+            setWallE();
+            timeChangeWallE = 0.0;
+        }
+    }
+
+    private void setWallE() {
+        List<Entity> listWall = getGameWorld().getEntitiesByType(BombermanType.WALL_E);
+        listWall.forEach(w -> {
+
+
+            w.translateY(SIZE_BLOCK);
+        });
     }
 
     @Override
