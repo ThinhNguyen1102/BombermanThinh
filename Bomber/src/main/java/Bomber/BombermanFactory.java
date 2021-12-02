@@ -47,10 +47,9 @@ public class BombermanFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(BombermanType.PLAYER)
                 // cần đổi
-                .viewWithBBox(new Circle(24, 24, 22, Color.WHITE))
+                .bbox(new HitBox(BoundingShape.circle(24)))
                 .with(physics)
                 .with(new PlayerComponent())
-//                .with(new PhysicsComponent())
                 .with(new CollidableComponent(true))
                 .zIndex(5)
                 .build();

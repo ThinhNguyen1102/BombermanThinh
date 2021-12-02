@@ -133,7 +133,7 @@ public class PlayerComponent extends Component {
 
     @Override
     public void onUpdate(double tpf) {
-        getEntity().setScaleUniform(0.9);
+        getEntity().setScaleUniform(0.95);
         if (physics.getVelocityX() != 0) {
             physics.setVelocityX((int) physics.getVelocityX() * 0.9);
             if (FXGLMath.abs(physics.getVelocityX()) < 1) {
