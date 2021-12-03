@@ -15,13 +15,12 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.image;
 import static Bomber.Constants.GameConst.*;
 
 public class BombComponent extends Component {
-    private ArrayList<Entity> listFire = new ArrayList<>();
+    private final ArrayList<Entity> listFire = new ArrayList<>();
 
-    private AnimatedTexture texture;
-    private AnimationChannel animation;
+    private final AnimatedTexture texture;
 
     public BombComponent() {
-        animation = new AnimationChannel(image("bomb_ani.png"), 3, SIZE_BLOCK, SIZE_BLOCK,
+        AnimationChannel animation = new AnimationChannel(image("bomb_ani.png"), 3, SIZE_BLOCK, SIZE_BLOCK,
                 Duration.seconds(0.5), 0, 2);
         texture = new AnimatedTexture(animation);
         texture.loop();
@@ -42,8 +41,8 @@ public class BombComponent extends Component {
         listFire.add(spawn("fire", new SpawnData(entity.getX(), entity.getY())));
 
         FXGL.getGameTimer().runOnceAfter(() -> {
-            for (int i = 0; i < listFire.size(); i++) {
-                listFire.get(i).removeFromWorld();
+            for (Entity value : listFire) {
+                value.removeFromWorld();
             }
         }, Duration.seconds(0.4));
         entity.removeFromWorld();

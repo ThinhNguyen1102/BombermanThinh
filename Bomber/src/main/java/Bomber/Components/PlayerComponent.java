@@ -33,7 +33,7 @@ public class PlayerComponent extends Component {
     private PhysicsComponent physics;
     private int speed = FXGL.geti("speed");
 
-    private AnimatedTexture texture;
+    private final AnimatedTexture texture;
     private AnimationChannel animIdleDown, animIdleRight, animIdleUp, animIdleLeft;
     private AnimationChannel animWalkDown, animWalkRight, animWalkUp, animWalkLeft;
     private AnimationChannel animDie;

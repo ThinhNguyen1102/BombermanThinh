@@ -1,6 +1,9 @@
 package Bomber;
 
 import Bomber.Components.*;
+import Bomber.Components.ai.DelayedChasePlayerComponent;
+import Bomber.Components.OrealComponent;
+import com.almasb.fxgl.core.util.LazyValue;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
@@ -8,6 +11,8 @@ import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.entity.components.IrremovableComponent;
+import com.almasb.fxgl.pathfinding.CellMoveComponent;
+import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
@@ -17,13 +22,11 @@ import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 import static Bomber.Constants.GameConst.*;
-import static com.almasb.fxgl.dsl.FXGL.texture;
+import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class BombermanFactory implements EntityFactory {
     @Spawns("background")
@@ -51,6 +54,8 @@ public class BombermanFactory implements EntityFactory {
                 .with(physics)
                 .with(new PlayerComponent())
                 .with(new CollidableComponent(true))
+                .with(new CellMoveComponent(48, 48, 100))
+                .with(new AStarMoveComponent(new LazyValue<>(() -> geto("grid"))))
                 .zIndex(5)
                 .build();
     }
@@ -59,10 +64,26 @@ public class BombermanFactory implements EntityFactory {
     public Entity newBalloom(SpawnData data) {
         return FXGL.entityBuilder(data)
                 .type(BombermanType.BALLOOM_E)
-                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"),
-                        data.<Integer>get("height"))))
+                .bbox(new HitBox(BoundingShape.circle(24)))
                 .with(new BalloomComponent())
                 .with(new CollidableComponent(true))
+                .zIndex(2)
+                .build();
+    }
+
+    @Spawns("oneal_e")
+    public Entity newOneal(SpawnData data) {
+//        AnimatedTexture view = texture("Oneal.png").toAnimatedTexture(7, Duration.seconds(0.5));
+        return FXGL.entityBuilder(data)
+                .type(BombermanType.ONEAL_E)
+                .bbox(new HitBox(BoundingShape.circle(22)))
+                .with(new CollidableComponent(true))
+//                .view(view.loop())
+                .atAnchored(new Point2D(24, 24), new Point2D(24, 24))
+                .with(new CellMoveComponent(48, 48, 100))
+                .with(new AStarMoveComponent(new LazyValue<>(() -> geto("grid"))))
+                .with(new DelayedChasePlayerComponent())
+                .with(new OrealComponent())
                 .zIndex(2)
                 .build();
     }
@@ -134,6 +155,18 @@ public class BombermanFactory implements EntityFactory {
                 .view("coral.png")
                 .with(new PhysicsComponent())
                 .with(new CollidableComponent(true))
+                .build();
+    }
+
+    @Spawns("coral_break")
+    public Entity newCoralBreak(SpawnData data) {
+        AnimatedTexture view = texture("coral_break_2.png").toAnimatedTexture(3, Duration.seconds(1));
+        return FXGL.entityBuilder(data)
+                .type(BombermanType.CORAL_BREAK)
+                .viewWithBBox(new Rectangle(SIZE_BLOCK - 3, SIZE_BLOCK - 3, Color.TRANSPARENT))
+                .atAnchored(new Point2D(0, 0), new Point2D(data.getX(), data.getY()))
+                .view(view.loop())
+                .zIndex(1)
                 .build();
     }
 

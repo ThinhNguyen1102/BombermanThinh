@@ -14,7 +14,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class BalloomComponent extends Component {
     private static final double ANIM_TIME_BALLOOM = 0.5;
     private static final int SIZE_FLAME = 45;
-    private double speed = 100.0;
+    private final double speed = 100.0;
 
     private double dx = speed;
     private double dy = 0;
@@ -29,8 +29,11 @@ public class BalloomComponent extends Component {
 
     private MoveDirection currMove = MoveDirection.RIGHT;
 
-    private AnimatedTexture texture;
-    private AnimationChannel animWalkRight, animWalkLeft, animDie, animStop;
+    private final AnimatedTexture texture;
+    private final AnimationChannel animWalkRight;
+    private final AnimationChannel animWalkLeft;
+    private final AnimationChannel animDie;
+    private final AnimationChannel animStop;
 
     public BalloomComponent() {
         onCollisionBegin(BombermanType.BALLOOM_E, BombermanType.WALL, (b, w) -> {

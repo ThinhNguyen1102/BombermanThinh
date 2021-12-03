@@ -9,16 +9,24 @@ import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
 @Required(AStarMoveComponent.class)
 public class DelayedChasePlayerComponent extends Component {
     private AStarMoveComponent astar;
-//    private boolean isDelayed = false;
+    private boolean isDelayed = false;
 
-//    public DelayedChasePlayerComponent withDelay() {
-//        isDelayed = true;
-//        return this;
-//    }
+    public void withDelay() {
+        isDelayed = true;
+    }
 
     @Override
     public void onUpdate(double tpf) {
-        move();
+        if (!isDelayed) {
+            move();
+        }
+        else {
+
+            // if delayed, only move when reached destination
+            if (astar.isAtDestination()) {
+                move();
+            }
+        }
     }
 
     private void move() {
