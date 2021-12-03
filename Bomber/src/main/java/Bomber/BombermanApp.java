@@ -114,21 +114,6 @@ public class BombermanApp extends GameApplication {
                 });
             }, Duration.seconds(0.5));
         }
-
-        timeChangeWallE = timeChangeWallE + tpf;
-        if (timeChangeWallE > 10) {
-            setWallE();
-            timeChangeWallE = 0.0;
-        }
-    }
-
-    private void setWallE() {
-        List<Entity> listWall = getGameWorld().getEntitiesByType(BombermanType.WALL_E);
-        listWall.forEach(w -> {
-
-
-            w.translateY(SIZE_BLOCK);
-        });
     }
 
     @Override

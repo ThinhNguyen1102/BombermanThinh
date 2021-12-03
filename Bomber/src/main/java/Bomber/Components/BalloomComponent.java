@@ -44,7 +44,7 @@ public class BalloomComponent extends Component {
             b.getComponent(BalloomComponent.class).turn();
         });
 
-        onCollisionBegin(BombermanType.BALLOOM_E, BombermanType.WALL_E, (b, w) -> {
+        onCollisionBegin(BombermanType.BALLOOM_E, BombermanType.BOMB, (b, bo) -> {
             b.getComponent(BalloomComponent.class).turn();
         });
 
@@ -104,22 +104,22 @@ public class BalloomComponent extends Component {
     private void setTurnBalloom(TurnDirection direc) {
         switch (direc) {
             case BLOCK_LEFT:
-                entity.translateX(2);
+                entity.translateX(3);
                 dx = 0.0;
                 dy = getRandomSpeed();
                 break;
             case BLOCK_RIGHT:
-                entity.translateX(-2);
+                entity.translateX(-3);
                 dx = 0.0;
                 dy = getRandomSpeed();
                 break;
             case BLOCK_UP:
-                entity.translateY(2);
+                entity.translateY(3);
                 dy = 0.0;
                 dx = getRandomSpeed();
                 break;
             case BLOCK_DOWN:
-                entity.translateY(-2);
+                entity.translateY(-3);
                 dy = 0.0;
                 dx = getRandomSpeed();
                 break;
