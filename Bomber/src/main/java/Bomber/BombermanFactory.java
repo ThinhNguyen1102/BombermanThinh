@@ -2,7 +2,8 @@ package Bomber;
 
 import Bomber.Components.*;
 import Bomber.Components.ai.DelayedChasePlayerComponent;
-import Bomber.Components.OrealComponent;
+import Bomber.Components.enemy.BalloomComponent;
+import Bomber.Components.enemy.OnealComponent;
 import com.almasb.fxgl.core.util.LazyValue;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
@@ -74,17 +75,15 @@ public class BombermanFactory implements EntityFactory {
 
     @Spawns("oneal_e")
     public Entity newOneal(SpawnData data) {
-//        AnimatedTexture view = texture("Oneal.png").toAnimatedTexture(7, Duration.seconds(0.5));
         return FXGL.entityBuilder(data)
                 .type(BombermanType.ONEAL_E)
                 .bbox(new HitBox(BoundingShape.circle(22)))
                 .with(new CollidableComponent(true))
-//                .view(view.loop())
                 .atAnchored(new Point2D(24, 24), new Point2D(24, 24))
                 .with(new CellMoveComponent(48, 48, 100))
                 .with(new AStarMoveComponent(new LazyValue<>(() -> geto("grid"))))
                 .with(new DelayedChasePlayerComponent())
-                .with(new OrealComponent())
+                .with(new OnealComponent())
                 .zIndex(2)
                 .build();
     }

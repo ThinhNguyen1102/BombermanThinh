@@ -1,6 +1,8 @@
 package Bomber.Components;
 
 import Bomber.BombermanType;
+import Bomber.Components.enemy.BalloomComponent;
+import Bomber.Components.enemy.OnealComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
@@ -32,12 +34,12 @@ public class FlameComponent extends Component {
         setCollisionBreak(BombermanType.CORAL, "coral_break");
 
         onCollisionBegin(BombermanType.FIRE, BombermanType.BALLOOM_E, (f, b) -> {
-            b.getComponent(BalloomComponent.class).BalloomDie();
+            b.getComponent(BalloomComponent.class).enemyDie();
             getGameTimer().runOnceAfter(b::removeFromWorld, Duration.seconds(1));
         });
 
         onCollisionBegin(BombermanType.FIRE, BombermanType.ONEAL_E, (f, o) -> {
-            o.getComponent(OrealComponent.class).OnealDie();
+            o.getComponent(OnealComponent.class).enemyDie();
             getGameTimer().runOnceAfter(o::removeFromWorld, Duration.seconds(1));
         });
 

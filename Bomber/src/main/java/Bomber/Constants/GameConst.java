@@ -10,7 +10,7 @@ public class GameConst {
     public static final String GAME_VERSION = "1.0";
 
     public static final int SPEED = 150;
-    public static final int BALLOOM_SPEED = 80;
+    public static final double ENEMY_SPEED = 80;
     public static final int TIME_PER_LEVEL = 100;
     public static final int SCORE_BRICK = 10;
     public static final int SCORE_ITEM = 20;
