@@ -1,9 +1,0 @@
-@font-face {
-    -fx-font-family: 'PressStart2P';
-    -fx-src: url("PressStart2P-Regular.ttf");
-}
-
-.label {
-    -fx-font-family: 'PressStart2P';
-    -fx-font-size: 30;
-}
