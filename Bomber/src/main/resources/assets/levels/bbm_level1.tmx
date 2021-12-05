@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="48" tileheight="48" infinite="0" nextlayerid="4" nextobjectid="403">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="31" height="15" tilewidth="48" tileheight="48" infinite="0" nextlayerid="4" nextobjectid="405">
  <tileset firstgid="1" name="classic" tilewidth="48" tileheight="48" tilecount="256" columns="16">
   <image source="classic.png" trans="ff00ff" width="768" height="768"/>
  </tileset>
@@ -184,6 +184,8 @@
   <object id="131" type="brick" x="1104" y="576" width="48" height="48"/>
   <object id="132" type="brick" x="1056" y="528" width="48" height="48"/>
   <object id="92" type="brick" x="912" y="432" width="48" height="48"/>
+  <object id="403" type="oneal_e" x="480" y="432" width="48" height="48"/>
+  <object id="404" type="doria_e" x="96" y="432" width="48" height="48"/>
  </objectgroup>
  <objectgroup id="3" name="Object Layer 2">
   <object id="154" type="speedItem" x="244" y="148" width="40" height="40"/>

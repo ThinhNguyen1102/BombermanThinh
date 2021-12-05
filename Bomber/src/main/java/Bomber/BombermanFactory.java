@@ -1,8 +1,8 @@
 package Bomber;
 
 import Bomber.Components.*;
-import Bomber.Components.ai.DelayedChasePlayerComponent;
 import Bomber.Components.enemy.BalloomComponent;
+import Bomber.Components.enemy.DoriaComponent;
 import Bomber.Components.enemy.OnealComponent;
 import com.almasb.fxgl.core.util.LazyValue;
 import com.almasb.fxgl.dsl.FXGL;
@@ -82,8 +82,21 @@ public class BombermanFactory implements EntityFactory {
                 .atAnchored(new Point2D(24, 24), new Point2D(24, 24))
                 .with(new CellMoveComponent(48, 48, 100))
                 .with(new AStarMoveComponent(new LazyValue<>(() -> geto("grid"))))
-                .with(new DelayedChasePlayerComponent())
                 .with(new OnealComponent())
+                .zIndex(2)
+                .build();
+    }
+
+    @Spawns("doria_e")
+    public Entity newDoria(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .type(BombermanType.DORIA_E)
+                .bbox(new HitBox(BoundingShape.circle(22)))
+                .with(new CollidableComponent(true))
+                .atAnchored(new Point2D(24, 24), new Point2D(24, 24))
+                .with(new CellMoveComponent(48, 48, 100))
+                .with(new AStarMoveComponent(new LazyValue<>(() -> geto("grid"))))
+                .with(new DoriaComponent())
                 .zIndex(2)
                 .build();
     }

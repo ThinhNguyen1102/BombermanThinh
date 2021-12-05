@@ -2,10 +2,11 @@ package Bomber.Components.enemy;
 
 
 import Bomber.BombermanType;
-import Bomber.Components.ai.DelayedChasePlayerComponent;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.component.Required;
 import com.almasb.fxgl.entity.components.BoundingBoxComponent;
+import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
 import com.almasb.fxgl.texture.AnimationChannel;
 import javafx.util.Duration;
 
@@ -14,10 +15,12 @@ import java.util.List;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-
+@Required(AStarMoveComponent.class)
 public class OnealComponent extends NormalEnemy {
-    private boolean moveAi = false;
+    protected AStarMoveComponent astar;
+    protected boolean moveWithAi = true;
     private boolean die = false;
+
     public OnealComponent() {
         super();
         onCollisionBegin(BombermanType.ONEAL_E, BombermanType.WALL, (o, w) -> {
@@ -36,17 +39,27 @@ public class OnealComponent extends NormalEnemy {
     @Override
     public void onUpdate(double tpf) {
         if (!die) {
-            if (!moveAi) {
-                DelayedChasePlayerComponent.setDelayed(true);
+            if (!moveWithAi) {
+                astar.pause();
                 entity.setScaleUniform(0.9);
                 entity.translateX(dx * tpf);
                 entity.translateY(dy * tpf);
             } else {
-                DelayedChasePlayerComponent.setDelayed(false);
+                astar.resume();
+                move();
             }
+            setAnimationStage();
+            detectPlayer();
         }
-        setAnimationStage();
-        detectPlayer();
+    }
+
+    private void move() {
+        var player = FXGL.getGameWorld().getSingleton(BombermanType.PLAYER);
+
+        int x = player.call("getCellX");
+        int y = player.call("getCellY");
+
+        astar.moveToCell(x, y);
     }
 
     private void detectPlayer() {
@@ -54,14 +67,12 @@ public class OnealComponent extends NormalEnemy {
         List<Entity> list = FXGL.getGameWorld().getEntitiesInRange(bbox.range(60, 60));
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).isType(BombermanType.PLAYER)) {
-//                DelayedChasePlayerComponent.setDelayed(false);
-                if (!die) moveAi = true;
+                moveWithAi = true;
                 break;
             }
 
             if (i == list.size() - 1) {
-                if (!die) moveAi = false;
-//                DelayedChasePlayerComponent.setDelayed(true);
+                moveWithAi = false;
             }
         }
     }
@@ -80,10 +91,10 @@ public class OnealComponent extends NormalEnemy {
 
     @Override
     public void enemyDie() {
+        die = true;
         dx = 0;
         dy = 0;
-        DelayedChasePlayerComponent.setDelayed(true);
-        die = true;
+        astar.pause();
         texture.loopNoOverride(animDie);
     }
 }

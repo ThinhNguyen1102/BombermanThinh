@@ -14,7 +14,7 @@ public abstract class NormalEnemy extends Component {
     private double lastX = 0;
     private double lastY = 0;
 
-    private enum TurnDirection {
+    protected enum TurnDirection {
         BLOCK_LEFT, BLOCK_RIGHT, BLOCK_UP, BLOCK_DOWN
     }
 
@@ -77,36 +77,36 @@ public abstract class NormalEnemy extends Component {
         }
     }
 
-    private double getRandomSpeed() {
-        return Math.random() > 0.5 ? ENEMY_SPEED : -ENEMY_SPEED;
-    }
-
-    private void setTurnEnemy(TurnDirection direct) {
+    protected void setTurnEnemy(TurnDirection direct) {
         switch (direct) {
             case BLOCK_LEFT:
                 entity.translateX(3);
                 dx = 0.0;
-                dy = getRandomSpeed();
+                dy = getRandom();
                 break;
             case BLOCK_RIGHT:
                 entity.translateX(-3);
                 dx = 0.0;
-                dy = getRandomSpeed();
+                dy = getRandom();
                 break;
             case BLOCK_UP:
                 entity.translateY(3);
                 dy = 0.0;
-                dx = getRandomSpeed();
+                dx = getRandom();
                 break;
             case BLOCK_DOWN:
                 entity.translateY(-3);
                 dy = 0.0;
-                dx = getRandomSpeed();
+                dx = getRandom();
                 break;
         }
     }
 
-    public void turn() {
+    protected double getRandom() {
+        return Math.random() > 0.5 ? ENEMY_SPEED : -ENEMY_SPEED;
+    }
+
+    protected void turn() {
         if (dx < 0.0) {
             setTurnEnemy(TurnDirection.BLOCK_LEFT);
         } else if (dx > 0.0) {

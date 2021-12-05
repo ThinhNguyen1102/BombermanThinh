@@ -2,6 +2,7 @@ package Bomber.Components;
 
 import Bomber.BombermanType;
 import Bomber.Components.enemy.BalloomComponent;
+import Bomber.Components.enemy.DoriaComponent;
 import Bomber.Components.enemy.OnealComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
@@ -41,6 +42,11 @@ public class FlameComponent extends Component {
         onCollisionBegin(BombermanType.FIRE, BombermanType.ONEAL_E, (f, o) -> {
             o.getComponent(OnealComponent.class).enemyDie();
             getGameTimer().runOnceAfter(o::removeFromWorld, Duration.seconds(1));
+        });
+
+        onCollisionBegin(BombermanType.FIRE, BombermanType.DORIA_E, (f, d) -> {
+            d.getComponent(DoriaComponent.class).enemyDie();
+            getGameTimer().runOnceAfter(d::removeFromWorld, Duration.seconds(1));
         });
 
         AnimationChannel animationFlame = new AnimationChannel(image("bomb_exploded_1.png"), 3, SIZE_BLOCK, SIZE_BLOCK,
